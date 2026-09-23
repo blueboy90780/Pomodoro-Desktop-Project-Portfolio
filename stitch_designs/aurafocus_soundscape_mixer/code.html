@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary":"#4cd7f6","surface":"#131316","surface-container-high":"#2a2a2d","surface-dim":"#131316","primary-fixed-dim":"#4edea3","break-glow":"rgba(6, 182, 212, 0.15)","on-tertiary":"#472a00","inverse-primary":"#006c49","on-primary-container":"#00422b","focus-emerald":"#10b981","on-error-container":"#ffdad6","break-cyan":"#06b6d4","surface-elevated":"#1c1c21","surface-container-lowest":"#0e0e11","primary-container":"#10b981","text-secondary":"#a1a1aa","on-primary-fixed":"#002113","tertiary":"#ffb95f","on-surface-variant":"#bbcabf","text-primary":"#f4f4f5","tertiary-fixed":"#ffddb8","surface-bright":"#39393c","pause-amber":"#f59e0b","border-highlight":"#3f3f46","secondary-container":"#03b5d3","on-surface":"#e4e1e6","background":"#131316","primary-fixed":"#6ffbbe","tertiary-container":"#e29100","on-primary":"#003824","secondary-fixed-dim":"#4cd7f6","focus-glow":"rgba(16, 185, 129, 0.15)","error-container":"#93000a","surface-variant":"#353438","on-primary-fixed-variant":"#005236","canvas-base":"#09090b","on-tertiary-fixed":"#2a1700","on-secondary-container":"#00424e","on-secondary":"#003640","inverse-surface":"#e4e1e6","on-error":"#690005","tertiary-fixed-dim":"#ffb95f","primary":"#4edea3","surface-tint":"#4edea3","on-secondary-fixed-variant":"#004e5c","text-tertiary":"#71717a","secondary-fixed":"#acedff","surface-card":"#121215","surface-container-low":"#1b1b1e","inverse-on-surface":"#303033","error":"#ffb4ab","surface-container":"#1f1f22","on-tertiary-container":"#523200","on-tertiary-fixed-variant":"#653e00","outline":"#86948a","surface-container-highest":"#353438","outline-variant":"#3c4a42","on-background":"#e4e1e6","on-secondary-fixed":"#001f26","border-subtle":"#27272a"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"gutter":"0.75rem","space-lg":"1rem","margin":"1rem","space-md":"0.75rem","space-xl":"1.5rem","space-sm":"0.5rem","space-xs":"0.25rem"},fontFamily:{"mono-metric":["JetBrains Mono"],"body-md":["Geist"],"headline-lg":["Geist"],"headline-md":["Geist"],"timer-display-compact":["JetBrains Mono"],"timer-display":["JetBrains Mono"],"mono-label":["JetBrains Mono"],"body-sm":["Geist"],"caption":["Geist"]},fontSize:{"mono-metric":["12px",{"lineHeight":"14px","fontWeight":"400"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-lg":["20px",{"lineHeight":"26px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-md":["16px",{"lineHeight":"22px","letterSpacing":"-0.01em","fontWeight":"500"}],"timer-display-compact":["40px",{"lineHeight":"40px","letterSpacing":"-0.03em","fontWeight":"300"}],"timer-display":["56px",{"lineHeight":"56px","letterSpacing":"-0.04em","fontWeight":"300"}],"mono-label":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"caption":["10px",{"lineHeight":"12px","letterSpacing":"0.02em","fontWeight":"500"}]}}}};</script></head><body class="bg-canvas-base text-on-surface antialiased select-none"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-card/90 backdrop-blur-md"><div class="h-14 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><img alt="AuraFocus Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WzEku_FFbG4KbgJxKWrL9Sz1LhQG7LO7FsluQsR5Liijt2j2G05WlFUCHA0X8msCDC4iJJZiVv5-3159Ez22ihXkQQSn1GwPfTu8vPxtM0fzQZoP9zPBfsI1ZLQPMzPF6Vown0xVx6v0Y2nWe3AIC-kUvUz0RiRkl1QCnus2iEpc8u-5Mwo1ELnXjFkfXF-wWeC7esNRnr2p6dj4H8AjhkuFs7x85gIop_Ls4NCnq1"/><span class="font-headline-md text-headline-md text-text-primary tracking-tight">AuraFocus</span><div class="hidden sm:flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container-low text-text-secondary font-mono-label text-mono-label"><span class="w-1.5 h-1.5 rounded-full bg-focus-emerald animate-pulse"></span><span>IDLE / READY</span></div></div><nav class="flex items-center p-1 rounded-xl bg-surface-container-lowest" data-active-classes="bg-surface-container-high text-text-primary font-medium shadow-sm"><a class="px-space-md py-1 rounded-lg font-body-sm text-body-sm text-text-secondary hover:text-on-surface transition-colors" data-path="focus-timer" href="#">Timer</a><a aria-current="page" class="px-space-md py-1 rounded-lg transition-colors bg-surface-container-high text-text-primary font-medium shadow-sm" data-path="soundscape-mixer" href="#">Soundscape</a><a class="px-space-md py-1 rounded-lg font-body-sm text-body-sm text-text-secondary hover:text-on-surface transition-colors" data-path="preferences" href="#">Preferences</a></nav><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-14 pb-16 bg-canvas-base min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-margin py-space-lg flex flex-col gap-space-lg">
+<!-- Header Control Strip -->
+<header class="flex flex-wrap items-center justify-between gap-space-md p-space-md rounded-xl bg-surface-card shadow-sm">
+<div class="flex items-center flex-wrap gap-space-md">
+<!-- Preset Dropdown Picker -->
+<div class="relative group">
+<label class="sr-only" for="preset-selector">Select Sound Preset</label>
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-focus-emerald text-[18px]">graphic_eq</span>
+<span class="font-mono-label text-mono-label text-text-secondary uppercase">Preset:</span>
+<select class="bg-transparent text-text-primary font-headline-md text-headline-md tracking-tight focus:outline-none cursor-pointer pr-space-sm appearance-none" id="preset-selector">
+<option class="bg-surface-elevated text-text-primary" selected="" value="deep-focus">Deep Focus</option>
+<option class="bg-surface-elevated text-text-primary" value="rainy-cafe">Rainy Cafe</option>
+<option class="bg-surface-elevated text-text-primary" value="late-night">Late Night Study</option>
+<option class="bg-surface-elevated text-text-primary" value="nordic-forest">Nordic Forest</option>
+<option class="bg-surface-elevated text-focus-emerald" value="custom">+ Custom Mix</option>
+</select>
+<span class="material-symbols-outlined text-text-secondary text-[16px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Save Preset Trigger -->
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary transition-colors" title="Save current parameters to preset" type="button">
+<span class="material-symbols-outlined text-[16px]">bookmark_add</span>
+<span class="font-body-sm text-body-sm font-medium">Save Mix</span>
+</button>
+</div>
+<!-- Realtime Stem Playback Status -->
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-2 px-space-md py-1.5 rounded-lg bg-surface-container-lowest">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-focus-emerald opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-focus-emerald"></span>
+</span>
+<span class="font-mono-label text-mono-label text-text-primary uppercase tracking-wider" id="active-counter-text">4 Tracks Playing</span>
+</div>
+</div>
+</header>
+<!-- Sound Card Grid (2-Column Multi-Track Layout) -->
+<section aria-label="Acoustic Stems Mixer" class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Track 1: Rain on Window (Active) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-elevated shadow-sm transition-all duration-200" data-track="rain" style="box-shadow: 0 0 20px -6px rgba(16, 185, 129, 0.16);">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-focus-emerald/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-focus-emerald text-[20px]">water_drop</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-primary truncate">Rain on Window</h3>
+<!-- Animated soundwave micro-graphic -->
+<div class="wave-indicator flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-3 bg-focus-emerald rounded-full animate-pulse"></span>
+<span class="w-[2px] h-1.5 bg-focus-emerald rounded-full animate-pulse delay-75"></span>
+<span class="w-[2px] h-2.5 bg-focus-emerald rounded-full animate-pulse delay-150"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-secondary uppercase">Precipitation • Binaural 48kHz</span>
+</div>
+</div>
+<!-- Tactile On/Off Toggle -->
+<button aria-checked="true" aria-label="Toggle Rain on Window" class="toggle-btn relative w-10 h-5 rounded-full bg-focus-emerald p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-canvas-base transition-transform translate-x-5 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="Rain on Window Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-focus-emerald" max="100" min="0" type="range" value="75"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-primary min-w-[34px] text-right">75%</span>
+</div>
+</article>
+<!-- Track 2: Forest Wind (Active) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-elevated shadow-sm transition-all duration-200" data-track="wind" style="box-shadow: 0 0 20px -6px rgba(16, 185, 129, 0.16);">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-focus-emerald/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-focus-emerald text-[20px]">air</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-primary truncate">Forest Wind</h3>
+<div class="wave-indicator flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-2 bg-focus-emerald rounded-full animate-pulse"></span>
+<span class="w-[2px] h-3 bg-focus-emerald rounded-full animate-pulse delay-100"></span>
+<span class="w-[2px] h-1.5 bg-focus-emerald rounded-full animate-pulse delay-200"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-secondary uppercase">Atmospheric • Alpine Flora</span>
+</div>
+</div>
+<button aria-checked="true" aria-label="Toggle Forest Wind" class="toggle-btn relative w-10 h-5 rounded-full bg-focus-emerald p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-canvas-base transition-transform translate-x-5 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="Forest Wind Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-focus-emerald" max="100" min="0" type="range" value="40"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-primary min-w-[34px] text-right">40%</span>
+</div>
+</article>
+<!-- Track 3: Campfire (Inactive) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-card opacity-70 hover:opacity-90 transition-all duration-200" data-track="campfire">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-text-tertiary text-[20px]">local_fire_department</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-secondary truncate">Campfire</h3>
+<div class="wave-indicator hidden flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-2 bg-focus-emerald rounded-full"></span>
+<span class="w-[2px] h-1.5 bg-focus-emerald rounded-full"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-tertiary uppercase">Thermal • Pine Crackle</span>
+</div>
+</div>
+<button aria-checked="false" aria-label="Toggle Campfire" class="toggle-btn relative w-10 h-5 rounded-full bg-surface-container-high p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-text-tertiary transition-transform translate-x-0 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="Campfire Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-text-tertiary" max="100" min="0" type="range" value="0"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-tertiary min-w-[34px] text-right">0%</span>
+</div>
+</article>
+<!-- Track 4: Coffee Shop (Active) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-elevated shadow-sm transition-all duration-200" data-track="cafe" style="box-shadow: 0 0 20px -6px rgba(16, 185, 129, 0.16);">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-focus-emerald/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-focus-emerald text-[20px]">local_cafe</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-primary truncate">Coffee Shop</h3>
+<div class="wave-indicator flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-2.5 bg-focus-emerald rounded-full animate-pulse"></span>
+<span class="w-[2px] h-3.5 bg-focus-emerald rounded-full animate-pulse delay-100"></span>
+<span class="w-[2px] h-2 bg-focus-emerald rounded-full animate-pulse delay-75"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-secondary uppercase">Urban • Gentle Murmur</span>
+</div>
+</div>
+<button aria-checked="true" aria-label="Toggle Coffee Shop" class="toggle-btn relative w-10 h-5 rounded-full bg-focus-emerald p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-canvas-base transition-transform translate-x-5 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="Coffee Shop Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-focus-emerald" max="100" min="0" type="range" value="60"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-primary min-w-[34px] text-right">60%</span>
+</div>
+</article>
+<!-- Track 5: White Noise (Inactive) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-card opacity-70 hover:opacity-90 transition-all duration-200" data-track="noise">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-text-tertiary text-[20px]">radio</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-secondary truncate">White Noise</h3>
+<div class="wave-indicator hidden flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-1.5 bg-focus-emerald rounded-full"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-tertiary uppercase">Synthetic • Pure 1/f Mask</span>
+</div>
+</div>
+<button aria-checked="false" aria-label="Toggle White Noise" class="toggle-btn relative w-10 h-5 rounded-full bg-surface-container-high p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-text-tertiary transition-transform translate-x-0 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="White Noise Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-text-tertiary" max="100" min="0" type="range" value="0"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-tertiary min-w-[34px] text-right">0%</span>
+</div>
+</article>
+<!-- Track 6: Lo-Fi Vinyl Crackle (Active) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-elevated shadow-sm transition-all duration-200" data-track="vinyl" style="box-shadow: 0 0 20px -6px rgba(16, 185, 129, 0.16);">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-focus-emerald/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-focus-emerald text-[20px]">album</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-primary truncate">Lo-Fi Vinyl Crackle</h3>
+<div class="wave-indicator flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-1 bg-focus-emerald rounded-full animate-pulse"></span>
+<span class="w-[2px] h-2.5 bg-focus-emerald rounded-full animate-pulse delay-150"></span>
+<span class="w-[2px] h-1.5 bg-focus-emerald rounded-full animate-pulse delay-75"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-secondary uppercase">Analog • 33 RPM Dust</span>
+</div>
+</div>
+<button aria-checked="true" aria-label="Toggle Lo-Fi Vinyl Crackle" class="toggle-btn relative w-10 h-5 rounded-full bg-focus-emerald p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-canvas-base transition-transform translate-x-5 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="Lo-Fi Vinyl Crackle Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-focus-emerald" max="100" min="0" type="range" value="35"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-primary min-w-[34px] text-right">35%</span>
+</div>
+</article>
+<!-- Track 7: Thunderstorm (Inactive) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-card opacity-70 hover:opacity-90 transition-all duration-200" data-track="thunder">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-text-tertiary text-[20px]">thunderstorm</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-secondary truncate">Thunderstorm</h3>
+<div class="wave-indicator hidden flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-1.5 bg-focus-emerald rounded-full"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-tertiary uppercase">Dynamics • Distant Rumble</span>
+</div>
+</div>
+<button aria-checked="false" aria-label="Toggle Thunderstorm" class="toggle-btn relative w-10 h-5 rounded-full bg-surface-container-high p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-text-tertiary transition-transform translate-x-0 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="Thunderstorm Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-text-tertiary" max="100" min="0" type="range" value="0"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-tertiary min-w-[34px] text-right">0%</span>
+</div>
+</article>
+<!-- Track 8: Gentle Stream (Inactive) -->
+<article class="sound-card relative flex flex-col justify-between p-space-md rounded-xl bg-surface-card opacity-70 hover:opacity-90 transition-all duration-200" data-track="stream">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="track-icon-wrapper w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-text-tertiary text-[20px]">waves</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-text-secondary truncate">Gentle Stream</h3>
+<div class="wave-indicator hidden flex items-end gap-[2px] h-3 px-1">
+<span class="w-[2px] h-1.5 bg-focus-emerald rounded-full"></span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-tertiary uppercase">Aquatic • Mountain Brook</span>
+</div>
+</div>
+<button aria-checked="false" aria-label="Toggle Gentle Stream" class="toggle-btn relative w-10 h-5 rounded-full bg-surface-container-high p-0.5 transition-colors focus:outline-none" role="switch" type="button">
+<span class="toggle-dot block w-4 h-4 rounded-full bg-text-tertiary transition-transform translate-x-0 shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-md pt-space-xs">
+<div class="relative flex-1 flex items-center">
+<input aria-label="Gentle Stream Volume" class="volume-slider w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-text-tertiary" max="100" min="0" type="range" value="0"/>
+</div>
+<span class="volume-val font-mono-metric text-mono-metric text-text-tertiary min-w-[34px] text-right">0%</span>
+</div>
+</article>
+</section>
+<!-- Master Control Deck -->
+<section aria-label="Master Output Deck" class="rounded-xl bg-surface-card p-space-md flex flex-col md:flex-row items-center justify-between gap-space-lg shadow-sm">
+<!-- Pomodoro Synchronization Sync Switch -->
+<div class="flex items-center justify-between w-full md:w-auto gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-focus-emerald text-[18px]">sync</span>
+<span class="font-body-md text-body-md text-text-primary font-medium">Sync with Pomodoro</span>
+</div>
+<span class="font-caption text-caption text-text-secondary">Auto-pause ambient stems during rest phases</span>
+</div>
+<button aria-checked="true" aria-label="Toggle Pomodoro Auto Sync" class="relative w-11 h-6 rounded-full bg-focus-emerald p-0.5 transition-colors focus:outline-none" id="pomo-sync-toggle" role="switch" type="button">
+<span class="block w-5 h-5 rounded-full bg-canvas-base transition-transform translate-x-5 shadow-sm"></span>
+</button>
+</div>
+<!-- Center Master Slider Control -->
+<div class="flex items-center gap-space-md w-full md:flex-1 md:max-w-md">
+<button aria-label="Instant Master Mute" class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container-high flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors shrink-0" id="master-mute-btn" type="button">
+<span class="material-symbols-outlined text-[20px]" id="master-mute-icon">volume_up</span>
+</button>
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="font-mono-label text-mono-label text-text-secondary uppercase">Master Deck Gain</span>
+<span class="font-mono-metric text-mono-metric text-focus-emerald" id="master-volume-readout">85%</span>
+</div>
+<input aria-label="Master Volume Deck" class="w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-focus-emerald" id="master-volume-slider" max="100" min="0" type="range" value="85"/>
+</div>
+</div>
+<!-- Quick Reset & Calibration Action -->
+<div class="flex items-center gap-space-sm w-full md:w-auto justify-end">
+<button class="flex items-center gap-1 px-space-md py-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary transition-colors" id="reset-stems-btn" title="Mute and reset all active sliders" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span class="font-body-sm text-body-sm">Reset Mix</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+<script>
+  (function initMixer() {
+    const cards = document.querySelectorAll('.sound-card');
+    const counterText = document.getElementById('active-counter-text');
+    const masterSlider = document.getElementById('master-volume-slider');
+    const masterReadout = document.getElementById('master-volume-readout');
+    const masterMuteBtn = document.getElementById('master-mute-btn');
+    const masterMuteIcon = document.getElementById('master-mute-icon');
+    const pomoToggle = document.getElementById('pomo-sync-toggle');
+    const resetBtn = document.getElementById('reset-stems-btn');
+
+    let isMuted = false;
+    let preMuteVal = 85;
+
+    function updateActiveCount() {
+      const activeCards = document.querySelectorAll('.sound-card button.toggle-btn[aria-checked="true"]');
+      const count = activeCards.length;
+      counterText.textContent = `${count} ${count === 1 ? 'Track' : 'Tracks'} Playing`;
+    }
+
+    cards.forEach(card => {
+      const toggle = card.querySelector('.toggle-btn');
+      const dot = card.querySelector('.toggle-dot');
+      const slider = card.querySelector('.volume-slider');
+      const valDisplay = card.querySelector('.volume-val');
+      const iconWrapper = card.querySelector('.track-icon-wrapper');
+      const icon = iconWrapper.querySelector('.material-symbols-outlined');
+      const wave = card.querySelector('.wave-indicator');
+      const title = card.querySelector('h3');
+
+      function setTrackActive(active, restoreVolume = true) {
+        toggle.setAttribute('aria-checked', active ? 'true' : 'false');
+        if (active) {
+          card.classList.remove('bg-surface-card', 'opacity-70');
+          card.classList.add('bg-surface-elevated');
+          card.style.boxShadow = '0 0 20px -6px rgba(16, 185, 129, 0.16)';
+          
+          toggle.classList.remove('bg-surface-container-high');
+          toggle.classList.add('bg-focus-emerald');
+          dot.classList.remove('bg-text-tertiary', 'translate-x-0');
+          dot.classList.add('bg-canvas-base', 'translate-x-5');
+          
+          iconWrapper.classList.remove('bg-surface-container-high');
+          iconWrapper.classList.add('bg-focus-emerald/15');
+          icon.classList.remove('text-text-tertiary');
+          icon.classList.add('text-focus-emerald');
+
+          title.classList.remove('text-text-secondary');
+          title.classList.add('text-text-primary');
+
+          slider.classList.remove('accent-text-tertiary');
+          slider.classList.add('accent-focus-emerald');
+
+          valDisplay.classList.remove('text-text-tertiary');
+          valDisplay.classList.add('text-text-primary');
+
+          if (wave) wave.classList.remove('hidden');
+
+          if (restoreVolume && parseInt(slider.value, 10) === 0) {
+            slider.value = 50;
+            valDisplay.textContent = '50%';
+          }
+        } else {
+          card.classList.add('bg-surface-card', 'opacity-70');
+          card.classList.remove('bg-surface-elevated');
+          card.style.boxShadow = 'none';
+
+          toggle.classList.add('bg-surface-container-high');
+          toggle.classList.remove('bg-focus-emerald');
+          dot.classList.add('bg-text-tertiary', 'translate-x-0');
+          dot.classList.remove('bg-canvas-base', 'translate-x-5');
+
+          iconWrapper.classList.add('bg-surface-container-high');
+          iconWrapper.classList.remove('bg-focus-emerald/15');
+          icon.classList.add('text-text-tertiary');
+          icon.classList.remove('text-focus-emerald');
+
+          title.classList.add('text-text-secondary');
+          title.classList.remove('text-text-primary');
+
+          slider.classList.add('accent-text-tertiary');
+          slider.classList.remove('accent-focus-emerald');
+
+          valDisplay.classList.add('text-text-tertiary');
+          valDisplay.classList.remove('text-text-primary');
+
+          if (wave) wave.classList.add('hidden');
+        }
+        updateActiveCount();
+      }
+
+      toggle.addEventListener('click', () => {
+        const currentlyActive = toggle.getAttribute('aria-checked') === 'true';
+        setTrackActive(!currentlyActive, true);
+      });
+
+      slider.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value, 10);
+        valDisplay.textContent = `${val}%`;
+        if (val > 0 && toggle.getAttribute('aria-checked') === 'false') {
+          setTrackActive(true, false);
+        } else if (val === 0 && toggle.getAttribute('aria-checked') === 'true') {
+          setTrackActive(false, false);
+        }
+      });
+    });
+
+    masterSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      masterReadout.textContent = `${val}%`;
+      if (val == 0) {
+        masterMuteIcon.textContent = 'volume_off';
+        isMuted = true;
+      } else {
+        masterMuteIcon.textContent = 'volume_up';
+        isMuted = false;
+      }
+    });
+
+    masterMuteBtn.addEventListener('click', () => {
+      if (!isMuted) {
+        preMuteVal = masterSlider.value;
+        masterSlider.value = 0;
+        masterReadout.textContent = '0%';
+        masterMuteIcon.textContent = 'volume_off';
+        isMuted = true;
+      } else {
+        masterSlider.value = preMuteVal > 0 ? preMuteVal : 85;
+        masterReadout.textContent = `${masterSlider.value}%`;
+        masterMuteIcon.textContent = 'volume_up';
+        isMuted = false;
+      }
+    });
+
+    pomoToggle.addEventListener('click', () => {
+      const active = pomoToggle.getAttribute('aria-checked') === 'true';
+      const next = !active;
+      pomoToggle.setAttribute('aria-checked', next ? 'true' : 'false');
+      const dot = pomoToggle.querySelector('span');
+      if (next) {
+        pomoToggle.classList.remove('bg-surface-container-high');
+        pomoToggle.classList.add('bg-focus-emerald');
+        dot.classList.remove('translate-x-0', 'bg-text-tertiary');
+        dot.classList.add('translate-x-5', 'bg-canvas-base');
+      } else {
+        pomoToggle.classList.add('bg-surface-container-high');
+        pomoToggle.classList.remove('bg-focus-emerald');
+        dot.classList.add('translate-x-0', 'bg-text-tertiary');
+        dot.classList.remove('translate-x-5', 'bg-canvas-base');
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      cards.forEach(card => {
+        const toggle = card.querySelector('.toggle-btn');
+        const slider = card.querySelector('.volume-slider');
+        const valDisplay = card.querySelector('.volume-val');
+        slider.value = 0;
+        valDisplay.textContent = '0%';
+        if (toggle.getAttribute('aria-checked') === 'true') {
+          toggle.click();
+        }
+      });
+    });
+  })();
+</script></main><footer class="fixed bottom-0 left-0 right-0 z-50 bg-surface-card/95 backdrop-blur-md"><div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-sm min-w-0"><div class="w-2 h-2 rounded-full bg-focus-emerald"></div><div class="flex flex-col"><span class="font-mono-label text-mono-label text-text-primary uppercase tracking-wider">3 Active Stems</span><span class="font-caption text-caption text-text-secondary truncate">Heavy Rain, Binaural Alpha, Cafe</span></div></div><div class="flex items-center gap-space-sm flex-1 max-w-xs mx-auto"><span class="material-symbols-outlined text-text-secondary text-[18px]">volume_down</span><div class="relative flex-1 h-1 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-primary w-[65%]"></div></div><span class="font-mono-metric text-mono-metric text-text-secondary min-w-[28px]">65%</span></div><div class="flex items-center gap-space-sm"><button aria-label="Global Mute" class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high flex items-center justify-center text-text-secondary hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">volume_up</span></button><button aria-label="Minimize to Tray" class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high flex items-center justify-center text-text-secondary hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">expand_more</span></button></div></div></footer></body></html>

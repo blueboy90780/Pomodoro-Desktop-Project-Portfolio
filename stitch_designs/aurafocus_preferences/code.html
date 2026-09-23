@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary":"#4cd7f6","surface":"#131316","surface-container-high":"#2a2a2d","surface-dim":"#131316","primary-fixed-dim":"#4edea3","break-glow":"rgba(6, 182, 212, 0.15)","on-tertiary":"#472a00","inverse-primary":"#006c49","on-primary-container":"#00422b","focus-emerald":"#10b981","on-error-container":"#ffdad6","break-cyan":"#06b6d4","surface-elevated":"#1c1c21","surface-container-lowest":"#0e0e11","primary-container":"#10b981","text-secondary":"#a1a1aa","on-primary-fixed":"#002113","tertiary":"#ffb95f","on-surface-variant":"#bbcabf","text-primary":"#f4f4f5","tertiary-fixed":"#ffddb8","surface-bright":"#39393c","pause-amber":"#f59e0b","border-highlight":"#3f3f46","secondary-container":"#03b5d3","on-surface":"#e4e1e6","background":"#131316","primary-fixed":"#6ffbbe","tertiary-container":"#e29100","on-primary":"#003824","secondary-fixed-dim":"#4cd7f6","focus-glow":"rgba(16, 185, 129, 0.15)","error-container":"#93000a","surface-variant":"#353438","on-primary-fixed-variant":"#005236","canvas-base":"#09090b","on-tertiary-fixed":"#2a1700","on-secondary-container":"#00424e","on-secondary":"#003640","inverse-surface":"#e4e1e6","on-error":"#690005","tertiary-fixed-dim":"#ffb95f","primary":"#4edea3","surface-tint":"#4edea3","on-secondary-fixed-variant":"#004e5c","text-tertiary":"#71717a","secondary-fixed":"#acedff","surface-card":"#121215","surface-container-low":"#1b1b1e","inverse-on-surface":"#303033","error":"#ffb4ab","surface-container":"#1f1f22","on-tertiary-container":"#523200","on-tertiary-fixed-variant":"#653e00","outline":"#86948a","surface-container-highest":"#353438","outline-variant":"#3c4a42","on-background":"#e4e1e6","on-secondary-fixed":"#001f26","border-subtle":"#27272a"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"gutter":"0.75rem","space-lg":"1rem","margin":"1rem","space-md":"0.75rem","space-xl":"1.5rem","space-sm":"0.5rem","space-xs":"0.25rem"},fontFamily:{"mono-metric":["JetBrains Mono"],"body-md":["Geist"],"headline-lg":["Geist"],"headline-md":["Geist"],"timer-display-compact":["JetBrains Mono"],"timer-display":["JetBrains Mono"],"mono-label":["JetBrains Mono"],"body-sm":["Geist"],"caption":["Geist"]},fontSize:{"mono-metric":["12px",{"lineHeight":"14px","fontWeight":"400"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-lg":["20px",{"lineHeight":"26px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-md":["16px",{"lineHeight":"22px","letterSpacing":"-0.01em","fontWeight":"500"}],"timer-display-compact":["40px",{"lineHeight":"40px","letterSpacing":"-0.03em","fontWeight":"300"}],"timer-display":["56px",{"lineHeight":"56px","letterSpacing":"-0.04em","fontWeight":"300"}],"mono-label":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"caption":["10px",{"lineHeight":"12px","letterSpacing":"0.02em","fontWeight":"500"}]}}}};</script></head><body class="bg-canvas-base text-on-surface antialiased select-none"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-card/90 backdrop-blur-md"><div class="h-14 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><img alt="AuraFocus Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WzEku_FFbG4KbgJxKWrL9Sz1LhQG7LO7FsluQsR5Liijt2j2G05WlFUCHA0X8msCDC4iJJZiVv5-3159Ez22ihXkQQSn1GwPfTu8vPxtM0fzQZoP9zPBfsI1ZLQPMzPF6Vown0xVx6v0Y2nWe3AIC-kUvUz0RiRkl1QCnus2iEpc8u-5Mwo1ELnXjFkfXF-wWeC7esNRnr2p6dj4H8AjhkuFs7x85gIop_Ls4NCnq1"/><span class="font-headline-md text-headline-md text-text-primary tracking-tight">AuraFocus</span><div class="hidden sm:flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container-low text-text-secondary font-mono-label text-mono-label"><span class="w-1.5 h-1.5 rounded-full bg-focus-emerald animate-pulse"></span><span>IDLE / READY</span></div></div><nav class="flex items-center p-1 rounded-xl bg-surface-container-lowest" data-active-classes="bg-surface-container-high text-text-primary font-medium shadow-sm"><a class="px-space-md py-1 rounded-lg font-body-sm text-body-sm text-text-secondary hover:text-on-surface transition-colors" data-path="focus-timer" href="#">Timer</a><a class="px-space-md py-1 rounded-lg font-body-sm text-body-sm text-text-secondary hover:text-on-surface transition-colors" data-path="soundscape-mixer" href="#">Soundscape</a><a aria-current="page" class="px-space-md py-1 rounded-lg transition-colors bg-surface-container-high text-text-primary font-medium shadow-sm" data-path="preferences" href="#">Preferences</a></nav><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-14 pb-16 bg-canvas-base min-h-screen"><div class="flex flex-col w-full">
+<div class="max-w-4xl mx-auto w-full px-space-md sm:px-space-xl py-space-lg pb-24">
+<!-- Top System Meta Banner -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-md mb-space-xl">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-mono-label text-mono-label text-primary uppercase tracking-widest">Configuration Matrix</span>
+<span class="font-mono-metric text-mono-metric text-text-tertiary">/</span>
+<span class="font-mono-label text-mono-label text-text-tertiary uppercase">TAURI_V2.4_CORE</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-text-primary tracking-tight">App Preferences & Environment</div>
+</div>
+<!-- Quick Status Metric Chips -->
+<div class="flex items-center gap-space-sm bg-surface-card p-1 rounded-xl shadow-sm">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container">
+<span class="w-1.5 h-1.5 rounded-full bg-focus-emerald"></span>
+<span class="font-mono-label text-mono-label text-text-secondary">DAEMON ACTIVE</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low text-text-tertiary">
+<span class="material-symbols-outlined text-[14px]">memory</span>
+<span class="font-mono-label text-mono-label">14.2 MB RSS</span>
+</div>
+</div>
+</div>
+<!-- Main Settings Bento Architecture -->
+<div class="space-y-space-xl">
+<!-- SECTION 1: TIMER DURATIONS -->
+<section class="bg-surface-card rounded-xl p-space-lg sm:p-space-xl shadow-sm relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between gap-space-md mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Cadence Intervals</h2>
+<p class="font-body-sm text-body-sm text-text-secondary">Calibrate intellectual flow sprints and cognitive rest phases</p>
+</div>
+</div>
+<span class="font-mono-label text-mono-label text-text-tertiary uppercase bg-surface-container-low px-2 py-0.5 rounded">POMODORO CORE</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Focus Duration -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between group hover:bg-surface-elevated transition-colors">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono-label text-mono-label text-primary uppercase">Focus Sprint</span>
+<span class="material-symbols-outlined text-primary text-[16px]">bolt</span>
+</div>
+<div class="flex items-baseline gap-1 my-2">
+<span class="font-timer-display-compact text-timer-display-compact text-text-primary" id="val-focus">25</span>
+<span class="font-mono-metric text-mono-metric text-text-tertiary">MIN</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2">
+<button aria-label="Decrease Focus Duration" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-focus', -5, 5, 120)" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<div class="flex-1 text-center font-caption text-caption text-text-tertiary font-mono-metric">STEP 5m</div>
+<button aria-label="Increase Focus Duration" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-focus', 5, 5, 120)" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<!-- Short Break -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between group hover:bg-surface-elevated transition-colors">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono-label text-mono-label text-secondary uppercase">Short Break</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">bedtime</span>
+</div>
+<div class="flex items-baseline gap-1 my-2">
+<span class="font-timer-display-compact text-timer-display-compact text-text-primary" id="val-short">5</span>
+<span class="font-mono-metric text-mono-metric text-text-tertiary">MIN</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2">
+<button aria-label="Decrease Short Break" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-short', -1, 1, 30)" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<div class="flex-1 text-center font-caption text-caption text-text-tertiary font-mono-metric">STEP 1m</div>
+<button aria-label="Increase Short Break" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-short', 1, 1, 30)" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<!-- Long Break -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between group hover:bg-surface-elevated transition-colors">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono-label text-mono-label text-tertiary uppercase">Long Recess</span>
+<span class="material-symbols-outlined text-tertiary text-[16px]">self_improvement</span>
+</div>
+<div class="flex items-baseline gap-1 my-2">
+<span class="font-timer-display-compact text-timer-display-compact text-text-primary" id="val-long">15</span>
+<span class="font-mono-metric text-mono-metric text-text-tertiary">MIN</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2">
+<button aria-label="Decrease Long Break" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-long', -5, 5, 60)" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<div class="flex-1 text-center font-caption text-caption text-text-tertiary font-mono-metric">STEP 5m</div>
+<button aria-label="Increase Long Break" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-long', 5, 5, 60)" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<!-- Cycle Interval -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between group hover:bg-surface-elevated transition-colors">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono-label text-mono-label text-text-secondary uppercase">Cadence Cadre</span>
+<span class="material-symbols-outlined text-text-secondary text-[16px]">all_inclusive</span>
+</div>
+<div class="flex items-baseline gap-1 my-2">
+<span class="font-timer-display-compact text-timer-display-compact text-text-primary" id="val-cycle">4</span>
+<span class="font-mono-metric text-mono-metric text-text-tertiary">ROUNDS</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2">
+<button aria-label="Decrease Cycle Interval" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-cycle', -1, 1, 12)" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<div class="flex-1 text-center font-caption text-caption text-text-tertiary font-mono-metric">STEP 1x</div>
+<button aria-label="Increase Cycle Interval" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-text-secondary hover:text-text-primary transition-all active:scale-95" onclick="adjustDuration('val-cycle', 1, 1, 12)" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Inline Interval Visual Bar -->
+<div class="mt-space-lg pt-space-md flex flex-col gap-2">
+<div class="flex justify-between items-center text-mono-label font-mono-label text-text-tertiary">
+<span>FULL SEQUENCE TIMELINE (125 MIN TOTAL)</span>
+<span class="text-primary">CYCLE PATTERN: 4S × 1L</span>
+</div>
+<div class="h-2 w-full rounded-full bg-surface-container overflow-hidden flex gap-1 p-0.5">
+<div class="h-full bg-focus-emerald rounded-full flex-1" title="Sprint 1 (25m)"></div>
+<div class="h-full bg-break-cyan rounded-full w-4" title="Break 1 (5m)"></div>
+<div class="h-full bg-focus-emerald rounded-full flex-1" title="Sprint 2 (25m)"></div>
+<div class="h-full bg-break-cyan rounded-full w-4" title="Break 2 (5m)"></div>
+<div class="h-full bg-focus-emerald rounded-full flex-1" title="Sprint 3 (25m)"></div>
+<div class="h-full bg-break-cyan rounded-full w-4" title="Break 3 (5m)"></div>
+<div class="h-full bg-focus-emerald rounded-full flex-1" title="Sprint 4 (25m)"></div>
+<div class="h-full bg-tertiary rounded-full w-12" title="Long Rest (15m)"></div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: AUDIO & SOUNDSCAPE AUTOMATIONS -->
+<section class="bg-surface-card rounded-xl p-space-lg sm:p-space-xl shadow-sm relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-48 h-48 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between gap-space-md mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">equalizer</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Audio & Acoustic Automations</h2>
+<p class="font-body-sm text-body-sm text-text-secondary">Hardware routing, cue synthesis, and dynamic ducking protocols</p>
+</div>
+</div>
+<span class="font-mono-label text-mono-label text-text-tertiary uppercase bg-surface-container-low px-2 py-0.5 rounded">DSP ENGINE</span>
+</div>
+<div class="space-y-space-md">
+<!-- Automation Toggle: Mute on breaks -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-space-md hover:bg-surface-elevated transition-colors">
+<div class="space-y-1 pr-space-md">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-body-md text-text-primary">Mute soundscape during breaks</span>
+<span class="font-mono-label text-caption px-2 py-0.5 rounded bg-surface-container-high text-secondary">AUTO-DUCK</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary max-w-xl">
+                Automatically pause or attenuate active binaural sound layers when the rest phase initiates, preventing sensory fatigue.
+              </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggle-mute-break" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-text-secondary after:rounded-full after:h-[18px] after:w-[18px] after:transition-all peer-checked:bg-focus-emerald peer-checked:after:bg-canvas-base shadow-inner"></div>
+</label>
+</div>
+<!-- Cue Chime Configuration -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-md hover:bg-surface-elevated transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-body-md text-text-primary">Phase Completion Chime</span>
+<span class="font-mono-label text-caption px-2 py-0.5 rounded bg-surface-container-high text-text-tertiary">RESONANT SINK</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary">
+                  Acoustic transition signal synthesized when transitioning across operational focus thresholds.
+                </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggle-chime" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-text-secondary after:rounded-full after:h-[18px] after:w-[18px] after:transition-all peer-checked:bg-focus-emerald peer-checked:after:bg-canvas-base shadow-inner"></div>
+</label>
+</div>
+<!-- Chime Preset Selector and Sound Test -->
+<div class="pt-space-sm grid grid-cols-1 sm:grid-cols-12 gap-space-md items-center" id="chime-options">
+<div class="sm:col-span-8 flex flex-col gap-1.5">
+<span class="font-mono-label text-mono-label text-text-tertiary uppercase">ACOUSTIC PROFILE</span>
+<div class="relative w-full">
+<select class="w-full appearance-none bg-surface-card text-text-primary font-body-sm text-body-sm px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-high cursor-pointer shadow-sm" id="chime-selector">
+<option selected="" value="zen-bell">Zen Temple Bell (432Hz Resonant)</option>
+<option value="tibetan-bowl">Tibetan Singing Bowl (Deep Low-Pass)</option>
+<option value="marimba">Soft Atmospheric Marimba (Harmonic)</option>
+<option value="digital-beep">Digital Discrete Pulse (Minimal Sine)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-text-tertiary pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<div class="sm:col-span-4 flex items-end">
+<button class="w-full h-[42px] px-space-md rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-body-sm text-body-sm flex items-center justify-center gap-2 transition-all active:scale-[0.98]" id="btn-test-chime" onclick="playChimeSample()" type="button">
+<span class="material-symbols-outlined text-secondary text-[18px]" id="chime-icon">volume_up</span>
+<span id="chime-label">Preview Sound</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Hardware Output Device -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm hover:bg-surface-elevated transition-colors">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-headline-md text-body-md text-text-primary">Audio Output Endpoint</span>
+<p class="font-body-sm text-body-sm text-text-secondary">CoreAudio / WASAPI Low-latency physical interface sink</p>
+</div>
+<span class="font-mono-label text-caption text-text-tertiary bg-surface-container-lowest px-2 py-0.5 rounded">48kHz / 24-bit</span>
+</div>
+<div class="relative w-full mt-1">
+<select class="w-full appearance-none bg-surface-card text-text-primary font-mono-metric text-mono-metric px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-high cursor-pointer shadow-sm">
+<option selected="">System Default (External Audio Interface / USB DAC)</option>
+<option>MacBook Pro Built-in Speakers (Spatial Array)</option>
+<option>AirPods Max (Low-Latency Bluetooth LE)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-text-tertiary pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: SYSTEM TRAY & OS INTEGRATIONS (TAURI v2) -->
+<section class="bg-surface-card rounded-xl p-space-lg sm:p-space-xl shadow-sm relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between gap-space-md mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary">OS Shell & Window Protocol</h2>
+<p class="font-body-sm text-body-sm text-text-secondary">Tauri runtime window managers, daemon triggers, and system chrome hooks</p>
+</div>
+</div>
+<span class="font-mono-label text-mono-label text-text-tertiary uppercase bg-surface-container-low px-2 py-0.5 rounded">TAURI V2 NATIVE</span>
+</div>
+<div class="space-y-space-md">
+<!-- Global Hotkey Interceptor -->
+<div class="p-space-md rounded-xl bg-surface-container hover:bg-surface-elevated transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-3">
+<div>
+<span class="font-headline-md text-body-md text-text-primary">Global Hotkey Accelerator</span>
+<p class="font-body-sm text-body-sm text-text-secondary">Universal shortcut active system-wide across all applications</p>
+</div>
+<span class="font-mono-label text-caption px-2 py-0.5 rounded bg-surface-container-high text-primary">IO-HOOK</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-space-sm">
+<div class="flex-1 w-full bg-surface-card px-space-md py-2 rounded-lg flex items-center justify-between shadow-sm">
+<span class="font-mono-label text-caption text-text-tertiary uppercase">Active Trigger</span>
+<div class="flex items-center gap-1.5" id="hotkey-display">
+<kbd class="px-2 py-1 rounded bg-surface-container-high text-text-primary font-mono-metric text-mono-metric shadow-sm">⌘</kbd>
+<kbd class="px-2 py-1 rounded bg-surface-container-high text-text-primary font-mono-metric text-mono-metric shadow-sm">Shift</kbd>
+<kbd class="px-2.5 py-1 rounded bg-surface-container-high text-text-primary font-mono-metric text-mono-metric shadow-sm">Space</kbd>
+</div>
+</div>
+<button class="w-full sm:w-auto px-space-lg py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-body-sm text-body-sm flex items-center justify-center gap-2 transition-all active:scale-[0.98]" id="btn-record-hotkey" onclick="toggleRecordHotkey()" type="button">
+<span class="material-symbols-outlined text-primary text-[18px]">fiber_manual_record</span>
+<span id="record-hotkey-text">Record Shortcut</span>
+</button>
+</div>
+</div>
+<!-- Toggles Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Toggle 1: Start Minimized -->
+<div class="p-space-md rounded-xl bg-surface-container flex items-center justify-between gap-space-md hover:bg-surface-elevated transition-colors">
+<div class="space-y-0.5">
+<span class="font-headline-md text-body-md text-text-primary block">Start minimized to tray</span>
+<p class="font-caption text-caption text-text-secondary">Launch invisibly in background at system startup.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input class="sr-only peer" id="toggle-start-minimized" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-text-secondary after:rounded-full after:h-[18px] after:w-[18px] after:transition-all peer-checked:bg-focus-emerald peer-checked:after:bg-canvas-base shadow-inner"></div>
+</label>
+</div>
+<!-- Toggle 2: Close to Tray -->
+<div class="p-space-md rounded-xl bg-surface-container flex items-center justify-between gap-space-md hover:bg-surface-elevated transition-colors">
+<div class="space-y-0.5">
+<span class="font-headline-md text-body-md text-text-primary block">Close window to system tray</span>
+<p class="font-caption text-caption text-text-secondary">Keep timer & ambient sounds running when closed.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggle-close-tray" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-text-secondary after:rounded-full after:h-[18px] after:w-[18px] after:transition-all peer-checked:bg-focus-emerald peer-checked:after:bg-canvas-base shadow-inner"></div>
+</label>
+</div>
+<!-- Toggle 3: Menu Bar Timer -->
+<div class="p-space-md rounded-xl bg-surface-container flex items-center justify-between gap-space-md hover:bg-surface-elevated transition-colors">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-body-md text-text-primary block">Menu Bar Countdown</span>
+<span class="font-mono-metric text-caption text-primary px-1.5 py-0.2 rounded bg-surface-container-high">24:59</span>
+</div>
+<p class="font-caption text-caption text-text-secondary">Real-time status string in macOS Menu Bar / Taskbar Tooltip.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggle-menubar-timer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-text-secondary after:rounded-full after:h-[18px] after:w-[18px] after:transition-all peer-checked:bg-focus-emerald peer-checked:after:bg-canvas-base shadow-inner"></div>
+</label>
+</div>
+<!-- Toggle 4: Native Notifications -->
+<div class="p-space-md rounded-xl bg-surface-container flex items-center justify-between gap-space-md hover:bg-surface-elevated transition-colors">
+<div class="space-y-0.5">
+<span class="font-headline-md text-body-md text-text-primary block">System OS Notifications</span>
+<p class="font-caption text-caption text-text-secondary">Banner alert dispatched upon phase completion.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggle-os-notifications" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-text-secondary after:rounded-full after:h-[18px] after:w-[18px] after:transition-all peer-checked:bg-focus-emerald peer-checked:after:bg-canvas-base shadow-inner"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: ACTIONS & COMMIT FOOTPRINT -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm">
+<button class="w-full sm:w-auto px-space-lg py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-text-secondary hover:text-text-primary font-body-sm text-body-sm flex items-center justify-center gap-2 transition-colors" onclick="resetToDefaults()" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Reset to Factory Defaults</span>
+</button>
+<div class="flex items-center gap-space-md w-full sm:w-auto">
+<!-- Status feedback toast message -->
+<div class="hidden items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container font-mono-label text-caption text-primary transition-all" id="save-status">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>PREFERENCES WRITTEN TO DISK</span>
+</div>
+<button class="w-full sm:w-auto px-space-xl py-2.5 rounded-lg bg-primary hover:bg-primary-fixed-dim text-on-primary font-headline-md text-body-md font-medium flex items-center justify-center gap-2 shadow-lg shadow-focus-glow transition-all active:scale-[0.98]" id="btn-save" onclick="savePreferences()" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Preferences</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+    function adjustDuration(elementId, delta, min, max) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      let val = parseInt(el.innerText, 10);
+      val = Math.max(min, Math.min(max, val + delta));
+      el.innerText = val;
+    }
+
+    let isRecordingHotkey = false;
+    function toggleRecordHotkey() {
+      const btnText = document.getElementById('record-hotkey-text');
+      const container = document.getElementById('hotkey-display');
+      isRecordingHotkey = !isRecordingHotkey;
+
+      if (isRecordingHotkey) {
+        btnText.innerText = "Press Keys...";
+        btnText.parentElement.classList.add("bg-error-container", "text-on-error-container");
+        container.innerHTML = `<span class="font-mono-metric text-mono-metric text-pause-amber animate-pulse">Awaiting key combination...</span>`;
+        
+        const keyHandler = (e) => {
+          e.preventDefault();
+          const keys = [];
+          if (e.metaKey || e.ctrlKey) keys.push('⌘');
+          if (e.altKey) keys.push('⌥');
+          if (e.shiftKey) keys.push('Shift');
+          if (e.key && !['Control', 'Shift', 'Alt', 'Meta'].includes(e.key)) {
+            keys.push(e.key.toUpperCase());
+          }
+
+          if (keys.length > 0 && !['Control', 'Shift', 'Alt', 'Meta'].includes(e.key)) {
+            container.innerHTML = keys.map(k => `<kbd class="px-2 py-1 rounded bg-surface-container-high text-text-primary font-mono-metric text-mono-metric shadow-sm">${k}</kbd>`).join(' ');
+            window.removeEventListener('keydown', keyHandler);
+            isRecordingHotkey = false;
+            btnText.innerText = "Record Shortcut";
+            btnText.parentElement.classList.remove("bg-error-container", "text-on-error-container");
+          }
+        };
+        window.addEventListener('keydown', keyHandler);
+      } else {
+        btnText.innerText = "Record Shortcut";
+        btnText.parentElement.classList.remove("bg-error-container", "text-on-error-container");
+      }
+    }
+
+    let audioCtx = null;
+    function playChimeSample() {
+      const icon = document.getElementById('chime-icon');
+      const label = document.getElementById('chime-label');
+      
+      icon.innerText = "graphic_eq";
+      label.innerText = "Playing...";
+
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const selector = document.getElementById('chime-selector');
+        const profile = selector ? selector.value : 'zen-bell';
+
+        let freq = 432;
+        if (profile === 'tibetan-bowl') freq = 216;
+        if (profile === 'marimba') freq = 528;
+        if (profile === 'digital-beep') freq = 880;
+
+        osc.type = profile === 'digital-beep' ? 'sine' : 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        
+        // Bell-like decaying envelope
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.2);
+
+        setTimeout(() => {
+          icon.innerText = "volume_up";
+          label.innerText = "Preview Sound";
+        }, 1200);
+      } catch (e) {
+        setTimeout(() => {
+          icon.innerText = "volume_up";
+          label.innerText = "Preview Sound";
+        }, 800);
+      }
+    }
+
+    function resetToDefaults() {
+      document.getElementById('val-focus').innerText = '25';
+      document.getElementById('val-short').innerText = '5';
+      document.getElementById('val-long').innerText = '15';
+      document.getElementById('val-cycle').innerText = '4';
+      
+      document.getElementById('toggle-mute-break').checked = true;
+      document.getElementById('toggle-chime').checked = true;
+      document.getElementById('toggle-start-minimized').checked = false;
+      document.getElementById('toggle-close-tray').checked = true;
+      document.getElementById('toggle-menubar-timer').checked = true;
+      document.getElementById('toggle-os-notifications').checked = true;
+
+      const container = document.getElementById('hotkey-display');
+      container.innerHTML = `
+        <kbd class="px-2 py-1 rounded bg-surface-container-high text-text-primary font-mono-metric text-mono-metric shadow-sm">⌘</kbd>
+        <kbd class="px-2 py-1 rounded bg-surface-container-high text-text-primary font-mono-metric text-mono-metric shadow-sm">Shift</kbd>
+        <kbd class="px-2.5 py-1 rounded bg-surface-container-high text-text-primary font-mono-metric text-mono-metric shadow-sm">Space</kbd>
+      `;
+
+      showSaveToast("RESTORED DEFAULT SYSTEM STATE");
+    }
+
+    function savePreferences() {
+      const btn = document.getElementById('btn-save');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Writing...</span>`;
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        showSaveToast("PREFERENCES WRITTEN TO DISK");
+      }, 400);
+    }
+
+    function showSaveToast(message) {
+      const toast = document.getElementById('save-status');
+      if (!toast) return;
+      toast.querySelector('span:last-child').innerText = message;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      
+      setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 2500);
+    }
+  </script>
+</div></main><footer class="fixed bottom-0 left-0 right-0 z-50 bg-surface-card/95 backdrop-blur-md"><div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-sm min-w-0"><div class="w-2 h-2 rounded-full bg-focus-emerald"></div><div class="flex flex-col"><span class="font-mono-label text-mono-label text-text-primary uppercase tracking-wider">3 Active Stems</span><span class="font-caption text-caption text-text-secondary truncate">Heavy Rain, Binaural Alpha, Cafe</span></div></div><div class="flex items-center gap-space-sm flex-1 max-w-xs mx-auto"><span class="material-symbols-outlined text-text-secondary text-[18px]">volume_down</span><div class="relative flex-1 h-1 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-primary w-[65%]"></div></div><span class="font-mono-metric text-mono-metric text-text-secondary min-w-[28px]">65%</span></div><div class="flex items-center gap-space-sm"><button aria-label="Global Mute" class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high flex items-center justify-center text-text-secondary hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">volume_up</span></button><button aria-label="Minimize to Tray" class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high flex items-center justify-center text-text-secondary hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">expand_more</span></button></div></div></footer></body></html>

@@ -1,0 +1,27 @@
+import { splitProps, type JSX } from "solid-js";
+
+export interface AuraLogoProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
+  size?: number;
+}
+
+export const AuraLogo = (props: AuraLogoProps) => {
+  const [local, others] = splitProps(props, ["class", "size"]);
+  const s = () => local.size ?? 32;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 64 64"
+      fill="none"
+      width={s()}
+      height={s()}
+      class={`object-contain shrink-0 ${local.class ?? ""}`}
+      {...others}
+    >
+      <circle cx="32" cy="32" r="28" fill="#18181b" stroke="#27272a" stroke-width="2" />
+      <circle cx="32" cy="32" r="18" stroke="#10b981" stroke-width="2.5" stroke-dasharray="80 35" stroke-linecap="round" />
+      <circle cx="32" cy="32" r="8" fill="#10b981" />
+      <path d="M22 32c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="#34d399" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+    </svg>
+  );
+};
