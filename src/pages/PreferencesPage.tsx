@@ -6,7 +6,13 @@ import { OsSection } from "../components/preferences/OsSection";
 import { ResetDefaultsModal } from "../components/preferences/ResetDefaultsModal";
 
 export const PreferencesPage = () => {
-  const { isSavedToastVisible, toastMessage, savePreferencesToDisk } = usePreferences();
+  const {
+    isSavedToastVisible,
+    toastMessage,
+    savePreferencesToDisk,
+    hasUnsavedChanges,
+    discardDraftChanges,
+  } = usePreferences();
   const [isResetModalOpen, setIsResetModalOpen] = createSignal(false);
   const [isWriting, setIsWriting] = createSignal(false);
 
@@ -59,16 +65,38 @@ export const PreferencesPage = () => {
 
           {/* Actions & Commit Footprint */}
           <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm">
-            <button
-              type="button"
-              onClick={() => setIsResetModalOpen(true)}
-              class="w-full sm:w-auto px-space-lg py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-text-secondary hover:text-text-primary font-body-sm text-body-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
-            >
-              <span class="material-symbols-outlined text-[16px]">restart_alt</span>
-              <span>Reset to Factory Defaults</span>
-            </button>
+            <div class="flex items-center gap-space-sm w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => setIsResetModalOpen(true)}
+                class="px-space-lg py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-text-secondary hover:text-text-primary font-body-sm text-body-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
+              >
+                <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                <span>Reset to Factory Defaults</span>
+              </button>
+
+              <Show when={hasUnsavedChanges()}>
+                <button
+                  type="button"
+                  onClick={discardDraftChanges}
+                  class="px-space-md py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-text-tertiary hover:text-text-primary font-body-sm text-body-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  title="Discard unsaved changes"
+                >
+                  <span class="material-symbols-outlined text-[16px]">undo</span>
+                  <span>Discard</span>
+                </button>
+              </Show>
+            </div>
 
             <div class="flex items-center gap-space-md w-full sm:w-auto">
+              {/* Unsaved Changes Staged Pill */}
+              <Show when={hasUnsavedChanges()}>
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pause-amber/15 text-pause-amber font-mono-label text-caption">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pause-amber animate-pulse"></span>
+                  <span>UNSAVED CHANGES</span>
+                </div>
+              </Show>
+
               {/* Status Feedback Toast Message */}
               <Show when={isSavedToastVisible()}>
                 <div
@@ -85,7 +113,11 @@ export const PreferencesPage = () => {
                 id="btn-save"
                 disabled={isWriting()}
                 onClick={handleSave}
-                class="w-full sm:w-auto px-space-xl py-2.5 rounded-lg bg-primary hover:bg-primary-fixed-dim text-on-primary font-headline-md text-body-md font-medium flex items-center justify-center gap-2 shadow-lg shadow-focus-glow transition-all active:scale-[0.98] cursor-pointer"
+                class={`w-full sm:w-auto px-space-xl py-2.5 rounded-lg font-headline-md text-body-md font-medium flex items-center justify-center gap-2 shadow-lg transition-all active:scale-[0.98] cursor-pointer ${
+                  hasUnsavedChanges()
+                    ? "bg-primary hover:bg-primary-fixed-dim text-on-primary shadow-focus-glow"
+                    : "bg-surface-container-high text-text-secondary hover:text-text-primary"
+                }`}
               >
                 <Show
                   when={!isWriting()}

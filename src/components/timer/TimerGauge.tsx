@@ -1,4 +1,5 @@
 import { useTimer } from "../../context/TimerContext";
+import { TimerSubHeader } from "./TimerSubHeader";
 
 export const TimerGauge = () => {
   const timer = useTimer();
@@ -17,75 +18,7 @@ export const TimerGauge = () => {
       <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-96 h-96 bg-focus-emerald/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
 
       {/* Sub-header Bar: Session Metadata & Modes */}
-      <header class="w-full flex flex-col md:flex-row items-center justify-between gap-space-md py-space-sm px-space-md rounded-xl bg-surface-card shadow-sm mb-space-xl">
-        {/* Left: Cycle Indicator & Preset */}
-        <div class="flex items-center gap-space-md w-full md:w-auto justify-between md:justify-start">
-          <div class="flex items-center gap-space-xs">
-            <span class="font-mono-label text-mono-label text-text-secondary uppercase tracking-widest mr-1">
-              CYCLE
-            </span>
-            <div class="flex items-center gap-1.5" title={`Cycle ${timer.currentCycle()} of ${timer.totalCycles()} Active`}>
-              <span class={`w-4 h-1.5 rounded-full ${timer.currentCycle() >= 1 ? "bg-focus-emerald" : "bg-surface-container-high"}`}></span>
-              <span class={`w-6 h-1.5 rounded-full ${timer.currentCycle() === 2 ? "bg-focus-emerald animate-pulse" : timer.currentCycle() > 2 ? "bg-focus-emerald" : "bg-surface-container-high"}`}></span>
-              <span class={`w-4 h-1.5 rounded-full ${timer.currentCycle() >= 3 ? "bg-focus-emerald" : "bg-surface-container-high"}`}></span>
-              <span class={`w-4 h-1.5 rounded-full ${timer.currentCycle() >= 4 ? "bg-focus-emerald" : "bg-surface-container-high"}`}></span>
-            </div>
-            <span class="font-mono-metric text-mono-metric text-text-primary ml-1.5">
-              {timer.currentCycle()}/{timer.totalCycles()}
-            </span>
-          </div>
-
-          <div class="h-3 w-px bg-surface-container-high hidden sm:block"></div>
-
-          <div class="flex items-center gap-1.5 px-space-sm py-0.5 rounded-lg bg-surface-container-low">
-            <span class="material-symbols-outlined text-[14px] text-primary">tune</span>
-            <span class="font-caption text-caption text-text-secondary">Preset:</span>
-            <span class="font-mono-label text-mono-label text-text-primary font-medium">Deep Focus (25/5)</span>
-          </div>
-        </div>
-
-        {/* Right: Phase Switcher Tabs */}
-        <div class="flex items-center p-1 rounded-xl bg-surface-container-lowest gap-1 w-full md:w-auto justify-center">
-          <button
-            type="button"
-            onClick={() => timer.setPhase("focus")}
-            class={`flex items-center gap-1.5 px-space-md py-1 rounded-lg font-body-sm text-body-sm transition-all ${
-              timer.currentPhase() === "focus"
-                ? "bg-surface-container-high text-text-primary shadow-sm"
-                : "hover:bg-surface-container-low text-text-secondary hover:text-text-primary"
-            }`}
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-focus-emerald"></span>
-            <span>Focus 25m</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => timer.setPhase("short_break")}
-            class={`flex items-center gap-1.5 px-space-md py-1 rounded-lg font-body-sm text-body-sm transition-all ${
-              timer.currentPhase() === "short_break"
-                ? "bg-surface-container-high text-break-cyan shadow-sm"
-                : "hover:bg-surface-container-low text-text-secondary hover:text-text-primary"
-            }`}
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-break-cyan/40"></span>
-            <span>Short Break 5m</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => timer.setPhase("long_break")}
-            class={`flex items-center gap-1.5 px-space-md py-1 rounded-lg font-body-sm text-body-sm transition-all ${
-              timer.currentPhase() === "long_break"
-                ? "bg-surface-container-high text-secondary shadow-sm"
-                : "hover:bg-surface-container-low text-text-secondary hover:text-text-primary"
-            }`}
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-break-cyan/20"></span>
-            <span>Long Break 15m</span>
-          </button>
-        </div>
-      </header>
+      <TimerSubHeader class="mb-space-xl" />
 
       {/* Main Hero Stage: Circular Timer */}
       <div class="relative flex flex-col items-center justify-center my-space-lg w-full max-w-md">

@@ -25,58 +25,60 @@ export const Header = () => {
 
   return (
     <header data-tauri-drag-region class="fixed top-0 left-0 right-0 z-50 bg-surface-card/90 backdrop-blur-md select-none">
-      <div class="h-14 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-md" data-tauri-drag-region>
+      <div class="h-14 max-w-7xl mx-auto px-margin grid grid-cols-3 items-center gap-space-lg" data-tauri-drag-region>
         {/* Left: Branding & Runtime Status Badge */}
-        <div class="flex items-center gap-space-sm" data-tauri-drag-region>
-          <A href="/timer" class="flex items-center gap-space-sm no-drag">
+        <div class="flex items-center gap-space-sm min-w-0" data-tauri-drag-region>
+          <A href="/timer" class="flex items-center gap-space-sm no-drag shrink-0">
             <AuraLogo size={32} />
             <span class="font-headline-md text-headline-md text-text-primary tracking-tight">AuraFocus</span>
           </A>
-          <div class="hidden sm:flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container-low text-text-secondary font-mono-label text-mono-label no-drag">
-            <span class={`w-1.5 h-1.5 rounded-full ${statusDotColor()} animate-pulse`}></span>
-            <span>{statusText()}</span>
+          <div class="hidden sm:flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container-low text-text-secondary font-mono-label text-mono-label no-drag truncate">
+            <span class={`w-1.5 h-1.5 rounded-full ${statusDotColor()} animate-pulse shrink-0`}></span>
+            <span class="truncate">{statusText()}</span>
           </div>
         </div>
 
         {/* Center: Desktop Navigation Tabs */}
-        <nav
-          aria-label="Primary Navigation"
-          class="flex items-center p-1 rounded-xl bg-surface-container-lowest no-drag"
-        >
-          <A
-            href="/timer"
-            class={`px-space-md py-1 rounded-lg transition-colors font-body-sm text-body-sm ${
-              isTimerActive()
-                ? "bg-surface-container-high text-text-primary font-medium shadow-sm"
-                : "text-text-secondary hover:text-on-surface"
-            }`}
+        <div class="flex items-center justify-center min-w-0" data-tauri-drag-region>
+          <nav
+            aria-label="Primary Navigation"
+            class="flex items-center p-1 rounded-xl bg-surface-container-lowest no-drag shrink-0"
           >
-            Timer
-          </A>
-          <A
-            href="/soundscape"
-            class={`px-space-md py-1 rounded-lg transition-colors font-body-sm text-body-sm ${
-              isSoundscapeActive()
-                ? "bg-surface-container-high text-text-primary font-medium shadow-sm"
-                : "text-text-secondary hover:text-on-surface"
-            }`}
-          >
-            Soundscape
-          </A>
-          <A
-            href="/preferences"
-            class={`px-space-md py-1 rounded-lg transition-colors font-body-sm text-body-sm ${
-              isPreferencesActive()
-                ? "bg-surface-container-high text-text-primary font-medium shadow-sm"
-                : "text-text-secondary hover:text-on-surface"
-            }`}
-          >
-            Preferences
-          </A>
-        </nav>
+            <A
+              href="/timer"
+              class={`px-space-md py-1 rounded-lg transition-colors font-body-sm text-body-sm ${
+                isTimerActive()
+                  ? "bg-surface-container-high text-text-primary font-medium shadow-sm"
+                  : "text-text-secondary hover:text-on-surface"
+              }`}
+            >
+              Timer
+            </A>
+            <A
+              href="/soundscape"
+              class={`px-space-md py-1 rounded-lg transition-colors font-body-sm text-body-sm ${
+                isSoundscapeActive()
+                  ? "bg-surface-container-high text-text-primary font-medium shadow-sm"
+                  : "text-text-secondary hover:text-on-surface"
+              }`}
+            >
+              Soundscape
+            </A>
+            <A
+              href="/preferences"
+              class={`px-space-md py-1 rounded-lg transition-colors font-body-sm text-body-sm ${
+                isPreferencesActive()
+                  ? "bg-surface-container-high text-text-primary font-medium shadow-sm"
+                  : "text-text-secondary hover:text-on-surface"
+              }`}
+            >
+              Preferences
+            </A>
+          </nav>
+        </div>
 
         {/* Right: User Profile Avatar */}
-        <div class="flex items-center gap-space-sm no-drag">
+        <div class="flex items-center justify-end gap-space-sm no-drag">
           <div
             title="AuraFocus Desktop Profile"
             class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer transition-transform active:scale-95"

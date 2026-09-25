@@ -2,7 +2,7 @@ import { createSignal, onCleanup } from "solid-js";
 import { usePreferences } from "../../context/PreferencesContext";
 
 export const OsSection = () => {
-  const { preferences, setOsToggle, setHotkey } = usePreferences();
+  const { draftPreferences, setOsToggle, setHotkey } = usePreferences();
   const [isRecording, setIsRecording] = createSignal(false);
 
   const toggleRecord = () => {
@@ -37,7 +37,7 @@ export const OsSection = () => {
     });
   };
 
-  const hotkeyTokens = () => preferences.os.hotkey.split(" ");
+  const hotkeyTokens = () => draftPreferences.os.hotkey.split(" ");
 
   return (
     <section class="bg-surface-card rounded-xl p-space-lg sm:p-space-xl shadow-sm relative overflow-hidden select-none">
@@ -127,7 +127,7 @@ export const OsSection = () => {
             <label class="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
-                checked={preferences.os.startMinimized}
+                checked={draftPreferences.os.startMinimized}
                 onChange={(e) => setOsToggle("startMinimized", e.currentTarget.checked)}
                 class="sr-only peer"
                 id="toggle-start-minimized"
@@ -149,7 +149,7 @@ export const OsSection = () => {
             <label class="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
-                checked={preferences.os.closeToTray}
+                checked={draftPreferences.os.closeToTray}
                 onChange={(e) => setOsToggle("closeToTray", e.currentTarget.checked)}
                 class="sr-only peer"
                 id="toggle-close-tray"
@@ -176,7 +176,7 @@ export const OsSection = () => {
             <label class="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
-                checked={preferences.os.menubarTimer}
+                checked={draftPreferences.os.menubarTimer}
                 onChange={(e) => setOsToggle("menubarTimer", e.currentTarget.checked)}
                 class="sr-only peer"
                 id="toggle-menubar-timer"
@@ -198,7 +198,7 @@ export const OsSection = () => {
             <label class="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
-                checked={preferences.os.osNotifications}
+                checked={draftPreferences.os.osNotifications}
                 onChange={(e) => setOsToggle("osNotifications", e.currentTarget.checked)}
                 class="sr-only peer"
                 id="toggle-os-notifications"

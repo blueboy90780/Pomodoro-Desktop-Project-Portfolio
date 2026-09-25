@@ -1,8 +1,10 @@
-import { createSignal } from "solid-js";
+import { createSignal, For } from "solid-js";
 import { useTimer } from "../../context/TimerContext";
+import { usePreferences } from "../../context/PreferencesContext";
 
 export const SessionMetrics = () => {
   const timer = useTimer();
+  const { preferences } = usePreferences();
   const [isEditingTask, setIsEditingTask] = createSignal(false);
   const [editTitle, setEditTitle] = createSignal(timer.activeTask().title);
 
@@ -10,6 +12,10 @@ export const SessionMetrics = () => {
     timer.updateActiveTask({ title: editTitle() });
     setIsEditingTask(false);
   };
+
+  const totalFocusMinutes = () => preferences.intervals.focus * timer.totalCycles();
+  const targetHours = () => Math.floor(totalFocusMinutes() / 60);
+  const targetRemainingMins = () => totalFocusMinutes() % 60;
 
   return (
     <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-space-md mt-space-lg mb-space-xl">
@@ -20,14 +26,23 @@ export const SessionMetrics = () => {
           <span class="material-symbols-outlined text-[18px] text-primary">bolt</span>
         </div>
         <div class="flex items-baseline gap-space-sm">
-          <span class="font-headline-lg text-headline-lg text-text-primary font-semibold">1h 40m</span>
-          <span class="font-caption text-caption text-primary">+25m vs yesterday</span>
+          <span class="font-headline-lg text-headline-lg text-text-primary font-semibold">
+            {targetHours()}h {targetRemainingMins()}m
+          </span>
+          <span class="font-caption text-caption text-primary">Target arc</span>
         </div>
         <div class="mt-space-md flex items-center gap-1.5">
           <div class="flex-1 h-1.5 rounded-full bg-surface-container-high overflow-hidden">
-            <div class="h-full bg-primary rounded-full" style={{ width: "58%" }}></div>
+            <div
+              class="h-full bg-primary rounded-full transition-all duration-300"
+              style={{
+                width: `${Math.min(100, Math.round((timer.currentCycle() / timer.totalCycles()) * 100))}%`,
+              }}
+            ></div>
           </div>
-          <span class="font-mono-metric text-mono-metric text-text-secondary">4/7</span>
+          <span class="font-mono-metric text-mono-metric text-text-secondary">
+            {timer.currentCycle()}/{timer.totalCycles()}
+          </span>
         </div>
       </div>
 
@@ -35,56 +50,57 @@ export const SessionMetrics = () => {
       <div class="p-space-lg rounded-xl bg-surface-card flex flex-col justify-between shadow-sm">
         <div class="flex items-center justify-between text-text-secondary mb-space-sm">
           <span class="font-mono-label text-mono-label uppercase tracking-wider">Session Trajectory</span>
-          <span class="font-mono-metric text-mono-metric text-text-primary">4 of 8 planned</span>
+          <span class="font-mono-metric text-mono-metric text-text-primary">
+            {timer.currentCycle()} of {timer.totalCycles()} planned
+          </span>
         </div>
         {/* Timeline Micro Dots */}
-        <div class="flex items-center justify-between py-2">
-          {/* Session 1: Done */}
-          <div class="flex flex-col items-center gap-1" title="09:00 Focus - Completed">
-            <span class="w-6 h-6 rounded-full bg-focus-emerald/20 text-focus-emerald flex items-center justify-center font-mono-metric text-[10px]">
-              ✓
-            </span>
-            <span class="font-caption text-caption text-text-tertiary">09:00</span>
-          </div>
-          <div class="w-3 h-0.5 bg-surface-container-high"></div>
-
-          {/* Session 2: Done */}
-          <div class="flex flex-col items-center gap-1" title="09:30 Focus - Completed">
-            <span class="w-6 h-6 rounded-full bg-focus-emerald/20 text-focus-emerald flex items-center justify-center font-mono-metric text-[10px]">
-              ✓
-            </span>
-            <span class="font-caption text-caption text-text-tertiary">09:30</span>
-          </div>
-          <div class="w-3 h-0.5 bg-surface-container-high"></div>
-
-          {/* Session 3: Done */}
-          <div class="flex flex-col items-center gap-1" title="10:15 Focus - Completed">
-            <span class="w-6 h-6 rounded-full bg-focus-emerald/20 text-focus-emerald flex items-center justify-center font-mono-metric text-[10px]">
-              ✓
-            </span>
-            <span class="font-caption text-caption text-text-tertiary">10:15</span>
-          </div>
-          <div class="w-3 h-0.5 bg-surface-container-high"></div>
-
-          {/* Session 4: Current Active */}
-          <div class="flex flex-col items-center gap-1" title="11:00 Focus - In Progress">
-            <span class="w-6 h-6 rounded-full bg-focus-emerald text-on-primary flex items-center justify-center font-mono-metric text-[10px] animate-pulse">
-              4
-            </span>
-            <span class="font-caption text-caption text-text-primary font-medium">Now</span>
-          </div>
-          <div class="w-3 h-0.5 bg-surface-container-high"></div>
-
-          {/* Session 5: Pending */}
-          <div class="flex flex-col items-center gap-1" title="Session 5 - Pending">
-            <span class="w-6 h-6 rounded-full bg-surface-container-high text-text-tertiary flex items-center justify-center font-mono-metric text-[10px]">
-              5
-            </span>
-            <span class="font-caption text-caption text-text-tertiary">11:45</span>
-          </div>
+        <div class="flex items-center justify-between py-2 overflow-x-auto gap-1">
+          <For each={Array.from({ length: timer.totalCycles() }, (_, i) => i + 1)}>
+            {(cycleNum, index) => {
+              const isDone = () => timer.currentCycle() > cycleNum;
+              const isCurrent = () => timer.currentCycle() === cycleNum;
+              return (
+                <>
+                  <div
+                    class="flex flex-col items-center gap-1 shrink-0"
+                    title={`Cycle ${cycleNum} - ${isDone() ? "Completed" : isCurrent() ? "In Progress" : "Pending"}`}
+                  >
+                    <span
+                      class={`w-6 h-6 rounded-full flex items-center justify-center font-mono-metric text-[10px] ${
+                        isDone()
+                          ? "bg-focus-emerald/20 text-focus-emerald"
+                          : isCurrent()
+                          ? "bg-focus-emerald text-on-primary animate-pulse"
+                          : "bg-surface-container-high text-text-tertiary"
+                      }`}
+                    >
+                      {isDone() ? "✓" : cycleNum}
+                    </span>
+                    <span
+                      class={`font-caption text-caption ${
+                        isCurrent() ? "text-text-primary font-medium" : "text-text-tertiary"
+                      }`}
+                    >
+                      {isCurrent() ? "Now" : `C${cycleNum}`}
+                    </span>
+                  </div>
+                  {index() < timer.totalCycles() - 1 && (
+                    <div
+                      class={`flex-1 h-0.5 min-w-[8px] mx-1 ${
+                        isDone() ? "bg-focus-emerald/40" : "bg-surface-container-high"
+                      }`}
+                    />
+                  )}
+                </>
+              );
+            }}
+          </For>
         </div>
         <div class="flex items-center justify-between text-text-tertiary font-caption text-caption mt-space-xs">
-          <span>Target: 3h 20m</span>
+          <span>
+            Target: {targetHours()}h {targetRemainingMins()}m
+          </span>
           <span class="text-focus-emerald font-medium">On Track</span>
         </div>
       </div>
@@ -96,7 +112,7 @@ export const SessionMetrics = () => {
           <button
             type="button"
             onClick={() => setIsEditingTask((prev) => !prev)}
-            class="text-text-tertiary hover:text-text-primary text-[14px]"
+            class="text-text-tertiary hover:text-text-primary text-[14px] cursor-pointer"
           >
             <span class="material-symbols-outlined text-[16px]">edit</span>
           </button>

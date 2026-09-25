@@ -3,12 +3,12 @@ import { usePreferences } from "../../context/PreferencesContext";
 import { playChimeProfile, type ChimeProfile } from "../../services/soundEngine";
 
 export const AudioSection = () => {
-  const { preferences, setAudioToggle, setChimeProfile, setOutputEndpoint } = usePreferences();
+  const { draftPreferences, setAudioToggle, setChimeProfile, setOutputEndpoint } = usePreferences();
   const [isPreviewing, setIsPreviewing] = createSignal(false);
 
   const handlePreview = async () => {
     setIsPreviewing(true);
-    await playChimeProfile(preferences.audio.chimeProfile);
+    await playChimeProfile(draftPreferences.audio.chimeProfile);
     setIsPreviewing(false);
   };
 
@@ -53,7 +53,7 @@ export const AudioSection = () => {
           <label class="relative inline-flex items-center cursor-pointer shrink-0">
             <input
               type="checkbox"
-              checked={preferences.audio.muteOnBreak}
+              checked={draftPreferences.audio.muteOnBreak}
               onChange={(e) => setAudioToggle("muteOnBreak", e.currentTarget.checked)}
               class="sr-only peer"
               id="toggle-mute-break"
@@ -81,7 +81,7 @@ export const AudioSection = () => {
             <label class="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
-                checked={preferences.audio.chimeEnabled}
+                checked={draftPreferences.audio.chimeEnabled}
                 onChange={(e) => setAudioToggle("chimeEnabled", e.currentTarget.checked)}
                 class="sr-only peer"
                 id="toggle-chime"
@@ -99,7 +99,7 @@ export const AudioSection = () => {
               <div class="relative w-full">
                 <select
                   id="chime-selector"
-                  value={preferences.audio.chimeProfile}
+                  value={draftPreferences.audio.chimeProfile}
                   onChange={(e) => setChimeProfile(e.currentTarget.value as ChimeProfile)}
                   class="w-full appearance-none bg-surface-card text-text-primary font-body-sm text-body-sm px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-high cursor-pointer shadow-sm"
                 >
@@ -147,7 +147,7 @@ export const AudioSection = () => {
           </div>
           <div class="relative w-full mt-1">
             <select
-              value={preferences.audio.outputEndpoint}
+              value={draftPreferences.audio.outputEndpoint}
               onChange={(e) => setOutputEndpoint(e.currentTarget.value)}
               class="w-full appearance-none bg-surface-card text-text-primary font-mono-metric text-mono-metric px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-high cursor-pointer shadow-sm"
             >

@@ -1,8 +1,10 @@
 import { createSignal, For } from "solid-js";
 import { useTimer } from "../../context/TimerContext";
+import { usePreferences } from "../../context/PreferencesContext";
 
 export const LongBreakSummary = () => {
   const timer = useTimer();
+  const { preferences } = usePreferences();
   const [fadeEnabled, setFadeEnabled] = createSignal(true);
   const [ambientVolume, setAmbientVolume] = createSignal(45);
 
@@ -14,6 +16,8 @@ export const LongBreakSummary = () => {
 
   const isRunning = () => timer.isRunning();
 
+  const totalSprintMinutes = () => preferences.intervals.focus * timer.totalCycles();
+
   return (
     <div class="w-full max-w-5xl mx-auto px-margin py-space-lg flex flex-col gap-space-xl select-none">
       {/* Top Banner: Set 01 Achieved */}
@@ -21,28 +25,34 @@ export const LongBreakSummary = () => {
         <div class="flex flex-wrap items-center gap-space-md">
           <div class="flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-high text-primary font-mono-label text-mono-label shadow-sm">
             <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            <span>SET 01 ACHIEVED</span>
+            <span>SET COMPLETED</span>
           </div>
           <div class="flex items-center gap-2">
             <div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-surface-container-lowest">
-              <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-sm" title="Sprint 1 Completed"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-sm" title="Sprint 2 Completed"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-sm" title="Sprint 3 Completed"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-sm ring-2 ring-primary/40 animate-pulse" title="Sprint 4 Completed"></span>
+              <For each={Array.from({ length: timer.totalCycles() }, (_, i) => i + 1)}>
+                {(cycleIndex) => (
+                  <span
+                    class="w-2.5 h-2.5 rounded-full bg-primary shadow-sm"
+                    title={`Sprint ${cycleIndex} Completed`}
+                  ></span>
+                )}
+              </For>
             </div>
-            <span class="font-mono-metric text-mono-metric text-text-primary">4 / 4 CYCLES</span>
+            <span class="font-mono-metric text-mono-metric text-text-primary">
+              {timer.totalCycles()} / {timer.totalCycles()} CYCLES
+            </span>
           </div>
         </div>
 
         <div class="flex items-center gap-space-sm self-end md:self-auto">
           <div class="flex items-center gap-1.5 px-space-md py-1 rounded-full bg-secondary-container/20 text-secondary font-mono-label text-mono-label">
             <span class="material-symbols-outlined text-[14px]">bedtime</span>
-            <span>LONG RECESS • 15 MIN</span>
+            <span>LONG RECESS • {preferences.intervals.longBreak} MIN</span>
           </div>
           <button
             type="button"
             id="btn-sound-mode"
-            class="p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary transition-colors"
+            class="p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
           >
             <span class="material-symbols-outlined text-[18px]">tune</span>
           </button>
@@ -94,7 +104,7 @@ export const LongBreakSummary = () => {
               </span>
               <div class="flex items-center gap-1.5 mt-2 px-2.5 py-0.5 rounded-full bg-surface-container text-text-secondary font-mono-label text-mono-label">
                 <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                <span>100M BLOCKS DONE</span>
+                <span>{totalSprintMinutes()}M BLOCKS DONE</span>
               </div>
             </div>
           </div>
@@ -102,7 +112,7 @@ export const LongBreakSummary = () => {
           <div class="text-center max-w-sm mt-space-md mb-space-lg">
             <p class="font-headline-md text-headline-md text-text-primary">Superb Focus Arc Concluded</p>
             <p class="font-body-sm text-body-sm text-text-secondary mt-1">
-              Four continuous intervals wrapped up smoothly. Take this 15-minute rest period to recharge completely.
+              {timer.totalCycles()} continuous intervals wrapped up smoothly. Take this {preferences.intervals.longBreak}-minute rest period to recharge completely.
             </p>
           </div>
 
@@ -112,7 +122,7 @@ export const LongBreakSummary = () => {
               id="btn-reset-cycle"
               title="Reset Cycle Counter"
               onClick={timer.resetCycleCounter}
-              class="w-10 h-10 rounded-full bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary flex items-center justify-center transition-all shadow-sm"
+              class="w-10 h-10 rounded-full bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary flex items-center justify-center transition-all shadow-sm cursor-pointer"
             >
               <span class="material-symbols-outlined text-[20px]">restart_alt</span>
             </button>
@@ -120,7 +130,7 @@ export const LongBreakSummary = () => {
               type="button"
               id="btn-play-pause"
               onClick={timer.toggleTimer}
-              class="flex-1 h-12 rounded-full bg-secondary hover:bg-secondary-fixed text-on-secondary flex items-center justify-center gap-2 font-headline-md text-headline-md shadow-lg transition-transform active:scale-95"
+              class="flex-1 h-12 rounded-full bg-secondary hover:bg-secondary-fixed text-on-secondary flex items-center justify-center gap-2 font-headline-md text-headline-md shadow-lg transition-transform active:scale-95 cursor-pointer"
             >
               <span class="material-symbols-outlined text-[24px]" style={{ "font-variation-settings": "'FILL' 1" }}>
                 {isRunning() ? "pause" : "play_arrow"}
@@ -132,7 +142,7 @@ export const LongBreakSummary = () => {
               id="btn-skip-cycle"
               title="Start New Sprint Arc"
               onClick={timer.skipPhase}
-              class="w-10 h-10 rounded-full bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary flex items-center justify-center transition-all shadow-sm"
+              class="w-10 h-10 rounded-full bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary flex items-center justify-center transition-all shadow-sm cursor-pointer"
             >
               <span class="material-symbols-outlined text-[20px]">skip_next</span>
             </button>
@@ -151,15 +161,17 @@ export const LongBreakSummary = () => {
               </span>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="font-timer-display-compact text-timer-display-compact text-text-primary">2h 05m</span>
-              <span class="font-body-sm text-body-sm text-text-secondary">/ 2h 00m Target</span>
+              <span class="font-timer-display-compact text-timer-display-compact text-text-primary">
+                {Math.floor(totalSprintMinutes() / 60)}h {totalSprintMinutes() % 60}m
+              </span>
+              <span class="font-body-sm text-body-sm text-text-secondary">/ Target</span>
             </div>
             <div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden mt-1">
               <div class="h-full bg-primary rounded-full transition-all duration-700" style={{ width: "100%" }}></div>
             </div>
             <div class="flex justify-between items-center text-text-secondary font-caption text-caption pt-1">
               <span>Goal Accomplished</span>
-              <span class="text-primary font-medium">104% Completed</span>
+              <span class="text-primary font-medium">100% Completed</span>
             </div>
           </div>
 
@@ -167,31 +179,33 @@ export const LongBreakSummary = () => {
           <div class="p-space-lg rounded-xl bg-surface-card shadow-md flex flex-col gap-space-sm">
             <div class="flex items-center justify-between pb-1">
               <span class="font-mono-label text-mono-label uppercase text-text-tertiary">Completed Trajectory</span>
-              <span class="font-caption text-caption text-text-secondary">Set 01 • Cadence 25/5</span>
+              <span class="font-caption text-caption text-text-secondary">
+                Cadence {preferences.intervals.focus}/{preferences.intervals.shortBreak}
+              </span>
             </div>
             <div class="flex flex-col gap-2">
               <For each={timer.trajectory()}>
                 {(item) => (
                   <div
                     class={`flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest ${
-                      item.cycleNumber === 4 ? "ring-1 ring-primary/30" : ""
+                      item.cycleNumber === timer.totalCycles() ? "ring-1 ring-primary/30" : ""
                     }`}
                   >
                     <div class="flex items-center gap-2.5">
                       <span
                         class={`w-5 h-5 rounded-full flex items-center justify-center ${
-                          item.cycleNumber === 4
+                          item.cycleNumber === timer.totalCycles()
                             ? "bg-primary text-on-primary"
                             : "bg-primary/20 text-primary"
                         }`}
                       >
                         <span class="material-symbols-outlined text-[14px]">
-                          {item.cycleNumber === 4 ? "done_all" : "check"}
+                          {item.cycleNumber === timer.totalCycles() ? "done_all" : "check"}
                         </span>
                       </span>
                       <span
                         class={`font-body-sm text-body-sm text-text-primary ${
-                          item.cycleNumber === 4 ? "font-medium" : ""
+                          item.cycleNumber === timer.totalCycles() ? "font-medium" : ""
                         }`}
                       >
                         {item.title}
@@ -199,7 +213,7 @@ export const LongBreakSummary = () => {
                     </div>
                     <span
                       class={`font-mono-metric text-mono-metric ${
-                        item.cycleNumber === 4 ? "text-primary" : "text-text-secondary"
+                        item.cycleNumber === timer.totalCycles() ? "text-primary" : "text-text-secondary"
                       }`}
                     >
                       {item.timeRange}
@@ -218,12 +232,12 @@ export const LongBreakSummary = () => {
                 {timer.activeTask().title}
               </p>
               <span class="font-caption text-caption text-text-secondary">
-                4 sprints logged • Auto-synced to workspace
+                {timer.totalCycles()} sprints logged • Auto-synced to workspace
               </span>
             </div>
             <button
               type="button"
-              class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary font-body-sm text-body-sm transition-colors whitespace-nowrap"
+              class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-text-secondary hover:text-text-primary font-body-sm text-body-sm transition-colors whitespace-nowrap cursor-pointer"
             >
               Edit Tag
             </button>
@@ -292,7 +306,7 @@ export const LongBreakSummary = () => {
           <button
             type="button"
             onClick={() => setFadeEnabled((prev) => !prev)}
-            class={`px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-body-sm font-body-sm transition-colors ${
+            class={`px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-body-sm font-body-sm transition-colors cursor-pointer ${
               fadeEnabled() ? "text-secondary" : "text-text-secondary"
             }`}
           >

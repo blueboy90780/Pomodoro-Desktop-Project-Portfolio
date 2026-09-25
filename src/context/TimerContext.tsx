@@ -49,8 +49,22 @@ export const TimerProvider = (props: ParentProps) => {
 
   const [currentPhase, setCurrentPhase] = createSignal<TimerPhase>("focus");
   const [isRunning, setIsRunning] = createSignal(false);
-  const [currentCycle, setCurrentCycle] = createSignal(2);
-  const totalCycles = () => 4;
+  const [currentCycle, setCurrentCycle] = createSignal(1);
+  const totalCycles = () => preferences.intervals.cycles;
+
+  const getDurationForPhase = (phase: TimerPhase): number => {
+    switch (phase) {
+      case "focus":
+        return preferences.intervals.focus * 60;
+      case "short_break":
+        return preferences.intervals.shortBreak * 60;
+      case "long_break":
+        return preferences.intervals.longBreak * 60;
+    }
+  };
+
+  const [totalSeconds, setTotalSeconds] = createSignal(getDurationForPhase("focus"));
+  const [remainingSeconds, setRemainingSeconds] = createSignal(getDurationForPhase("focus"));
 
   createEffect(() => {
     const phase = currentPhase();
@@ -62,20 +76,35 @@ export const TimerProvider = (props: ParentProps) => {
     audio.setTimerRunning(isRunning());
   });
 
-  // Durations in minutes (can be driven from Preferences)
-  const getDurationForPhase = (phase: TimerPhase): number => {
-    switch (phase) {
-      case "focus":
-        return 25 * 60;
-      case "short_break":
-        return 5 * 60;
-      case "long_break":
-        return 15 * 60;
+  // Clamp currentCycle if total cycles is reduced below current cycle
+  createEffect(() => {
+    const max = totalCycles();
+    if (currentCycle() > max) {
+      setCurrentCycle(Math.max(1, max));
     }
-  };
+  });
 
-  const [totalSeconds, setTotalSeconds] = createSignal(18 * 60 + 42); // Initial demo state: 18m 42s left of 25m
-  const [remainingSeconds, setRemainingSeconds] = createSignal(18 * 60 + 42);
+  // Dynamically update the timer when preferences change for the current phase
+  createEffect(() => {
+    const phase = currentPhase();
+    const targetDuration = getDurationForPhase(phase);
+    const oldTotal = totalSeconds();
+
+    if (targetDuration !== oldTotal) {
+      const currentRemaining = remainingSeconds();
+      const elapsed = Math.max(0, oldTotal - currentRemaining);
+      setTotalSeconds(targetDuration);
+
+      if (!isRunning() && currentRemaining >= oldTotal) {
+        // If timer hasn't started or was at full duration, set to new full duration
+        setRemainingSeconds(targetDuration);
+      } else {
+        // If timer is running or partially elapsed, adjust remaining seconds
+        const newRemaining = Math.max(0, targetDuration - elapsed);
+        setRemainingSeconds(newRemaining);
+      }
+    }
+  });
 
   const [activeTask, setActiveTask] = createSignal<ActiveTask>({
     title: "AuraFocus Audio Pipeline Architecture",
@@ -84,12 +113,16 @@ export const TimerProvider = (props: ParentProps) => {
     sprint: "Sprint #4",
   });
 
-  const [trajectory] = createSignal<TrajectoryItem[]>([
-    { id: "c1", cycleNumber: 1, title: "Cycle 1: Core Setup & Profiling", timeRange: "09:00 - 09:25", completed: true },
-    { id: "c2", cycleNumber: 2, title: "Cycle 2: Audio Engine Nodes", timeRange: "09:30 - 09:55", completed: true },
-    { id: "c3", cycleNumber: 3, title: "Cycle 3: Web Audio Synth Graph", timeRange: "10:00 - 10:25", completed: true },
-    { id: "c4", cycleNumber: 4, title: "Cycle 4: Buffer Mixing Pipeline", timeRange: "10:30 - 10:55", completed: true },
-  ]);
+  const trajectory = () => {
+    const cycles = totalCycles();
+    return Array.from({ length: cycles }, (_, i) => ({
+      id: `c${i + 1}`,
+      cycleNumber: i + 1,
+      title: `Cycle ${i + 1}: Sprint Block`,
+      timeRange: `${preferences.intervals.focus}m interval`,
+      completed: currentCycle() > i + 1 || (currentCycle() === cycles && currentPhase() === "long_break"),
+    }));
+  };
 
   const formattedMinutes = () => {
     const mins = Math.floor(remainingSeconds() / 60);
@@ -102,7 +135,7 @@ export const TimerProvider = (props: ParentProps) => {
   };
 
   const progressFraction = () => {
-    const total = getDurationForPhase(currentPhase());
+    const total = totalSeconds();
     if (total <= 0) return 0;
     return Math.max(0, Math.min(1, remainingSeconds() / total));
   };
@@ -128,6 +161,7 @@ export const TimerProvider = (props: ParentProps) => {
     setIsRunning(false);
     audio.setTimerRunning(false);
     const duration = getDurationForPhase(currentPhase());
+    setTotalSeconds(duration);
     setRemainingSeconds(duration);
   };
 
