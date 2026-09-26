@@ -36,7 +36,7 @@ const DEFAULT_PREFERENCES: PreferencesState = {
     muteOnBreak: true,
     chimeEnabled: true,
     chimeProfile: "zen-bell",
-    outputEndpoint: "System Default (External Audio Interface / USB DAC)",
+    outputEndpoint: "System Default",
   },
   os: {
     hotkey: "⌘ Shift Space",
@@ -71,6 +71,18 @@ export const PreferencesProvider = (props: ParentProps) => {
     const loaded = loadPreferences(DEFAULT_PREFERENCES);
     if (!loaded.intervals.cycles || loaded.intervals.cycles < 2) {
       loaded.intervals.cycles = 2;
+    }
+    // Migrate legacy or mock endpoint strings to "System Default"
+    if (
+      !loaded.audio?.outputEndpoint ||
+      loaded.audio.outputEndpoint.includes("External Audio Interface") ||
+      loaded.audio.outputEndpoint.includes("MacBook") ||
+      loaded.audio.outputEndpoint.includes("AirPods")
+    ) {
+      loaded.audio = {
+        ...loaded.audio,
+        outputEndpoint: "System Default",
+      };
     }
     return loaded;
   };

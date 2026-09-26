@@ -51,15 +51,35 @@ export async function fetchSystemMetrics(): Promise<SystemMetrics> {
 export async function fetchAudioDevices(): Promise<AudioDevice[]> {
   if (isTauriEnvironment()) {
     try {
-      return await invokeCommand<AudioDevice[]>("get_audio_output_devices");
-    } catch {
-      // Fallback
+      const devices = await invokeCommand<AudioDevice[]>("get_audio_output_devices");
+      if (devices && devices.length > 0) {
+        return devices;
+      }
+    } catch (err) {
+      console.warn("Failed to get audio devices from Tauri IPC:", err);
     }
   }
+
+  // Browser MediaDevices API fallback (when previewing in browser outside Tauri)
+  if (typeof navigator !== "undefined" && navigator.mediaDevices?.enumerateDevices) {
+    try {
+      const mediaDevices = await navigator.mediaDevices.enumerateDevices();
+      const audioOutputs = mediaDevices.filter((d) => d.kind === "audiooutput");
+      if (audioOutputs.length > 0) {
+        return audioOutputs.map((d, idx) => ({
+          id: d.deviceId || `device-${idx}`,
+          name: d.label || (d.deviceId === "default" ? "System Default Output" : `Audio Output ${idx + 1}`),
+          isDefault: d.deviceId === "default" || idx === 0,
+          sampleRate: 48000,
+        }));
+      }
+    } catch (err) {
+      console.warn("Failed to query browser media devices:", err);
+    }
+  }
+
   return [
-    { id: "default", name: "System Default (External Audio Interface / USB DAC)", isDefault: true, sampleRate: 48000 },
-    { id: "built_in", name: "MacBook Pro Built-in Speakers (Spatial Array)", isDefault: false, sampleRate: 48000 },
-    { id: "airpods", name: "AirPods Max (Low-Latency Bluetooth LE)", isDefault: false, sampleRate: 44100 },
+    { id: "default", name: "System Default Audio Output", isDefault: true, sampleRate: 48000 },
   ];
 }
 

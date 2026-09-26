@@ -1,10 +1,47 @@
-import { createSignal } from "solid-js";
+import { createSignal, onMount, For, createMemo } from "solid-js";
 import { usePreferences } from "../../context/PreferencesContext";
 import { playChimeProfile, type ChimeProfile } from "../../services/soundEngine";
+import { fetchAudioDevices, type AudioDevice } from "../../services/ipc";
 
 export const AudioSection = () => {
   const { draftPreferences, setAudioToggle, setChimeProfile, setOutputEndpoint } = usePreferences();
   const [isPreviewing, setIsPreviewing] = createSignal(false);
+  const [devices, setDevices] = createSignal<AudioDevice[]>([]);
+  const [isLoadingDevices, setIsLoadingDevices] = createSignal(true);
+
+  onMount(async () => {
+    try {
+      const detected = await fetchAudioDevices();
+      setDevices(detected);
+    } catch (err) {
+      console.warn("Failed to load audio devices:", err);
+    } finally {
+      setIsLoadingDevices(false);
+    }
+  });
+
+  const defaultDevice = createMemo(() => devices().find((d) => d.isDefault) || devices()[0]);
+
+  const currentDevice = createMemo(() => {
+    const list = devices();
+    const current = draftPreferences.audio.outputEndpoint;
+    if (!current || current === "System Default") {
+      return defaultDevice();
+    }
+    return (
+      list.find((d) => d.name === current || d.id === current) ||
+      defaultDevice()
+    );
+  });
+
+  const sampleRateBadge = createMemo(() => {
+    const dev = currentDevice();
+    if (dev?.sampleRate) {
+      const khz = dev.sampleRate / 1000;
+      return `${khz}kHz / 24-bit`;
+    }
+    return "48kHz / 24-bit";
+  });
 
   const handlePreview = async () => {
     setIsPreviewing(true);
@@ -138,22 +175,38 @@ export const AudioSection = () => {
                 Audio Output Endpoint
               </span>
               <p class="font-body-sm text-body-sm text-text-secondary">
-                CoreAudio / WASAPI Low-latency physical interface sink
+                WASAPI / CoreAudio Low-latency physical interface sink
               </p>
             </div>
             <span class="font-mono-label text-caption text-text-tertiary bg-surface-container-lowest px-2 py-0.5 rounded">
-              48kHz / 24-bit
+              {sampleRateBadge()}
             </span>
           </div>
           <div class="relative w-full mt-1">
             <select
               value={draftPreferences.audio.outputEndpoint}
               onChange={(e) => setOutputEndpoint(e.currentTarget.value)}
-              class="w-full appearance-none bg-surface-card text-text-primary font-mono-metric text-mono-metric px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-high cursor-pointer shadow-sm"
+              disabled={isLoadingDevices()}
+              class="w-full appearance-none bg-surface-card text-text-primary font-mono-metric text-mono-metric px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-high cursor-pointer shadow-sm disabled:opacity-60"
             >
-              <option>System Default (External Audio Interface / USB DAC)</option>
-              <option>MacBook Pro Built-in Speakers (Spatial Array)</option>
-              <option>AirPods Max (Low-Latency Bluetooth LE)</option>
+              <option value="System Default">
+                {defaultDevice() ? `System Default (${defaultDevice()?.name})` : "System Default"}
+              </option>
+              <For each={devices()}>
+                {(device) => (
+                  <option value={device.name}>
+                    {device.name}
+                  </option>
+                )}
+              </For>
+              {/* If an unlisted endpoint is currently selected, display it gracefully */}
+              {draftPreferences.audio.outputEndpoint &&
+                draftPreferences.audio.outputEndpoint !== "System Default" &&
+                !devices().some((d) => d.name === draftPreferences.audio.outputEndpoint) && (
+                  <option value={draftPreferences.audio.outputEndpoint}>
+                    {draftPreferences.audio.outputEndpoint} (Unavailable)
+                  </option>
+                )}
             </select>
             <span class="material-symbols-outlined absolute right-3 top-2.5 text-text-tertiary pointer-events-none text-[18px]">
               expand_more
