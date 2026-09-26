@@ -33,6 +33,46 @@ export async function invokeCommand<T>(command: string, args?: Record<string, un
   return Promise.resolve({} as T);
 }
 
+export async function setCloseToTray(enabled: boolean): Promise<void> {
+  if (isTauriEnvironment()) {
+    try {
+      await invokeCommand("set_close_to_tray", { enabled });
+    } catch (err) {
+      console.warn("Failed to set close to tray state:", err);
+    }
+  }
+}
+
+export async function minimizeWindow(): Promise<void> {
+  if (isTauriEnvironment()) {
+    try {
+      await invokeCommand("minimize_window");
+    } catch (err) {
+      console.warn("Failed to minimize window:", err);
+    }
+  }
+}
+
+export async function showWindow(): Promise<void> {
+  if (isTauriEnvironment()) {
+    try {
+      await invokeCommand("show_window");
+    } catch (err) {
+      console.warn("Failed to show window:", err);
+    }
+  }
+}
+
+export async function exitApp(): Promise<void> {
+  if (isTauriEnvironment()) {
+    try {
+      await invokeCommand("exit_app");
+    } catch (err) {
+      console.warn("Failed to exit app:", err);
+    }
+  }
+}
+
 export async function fetchSystemMetrics(): Promise<SystemMetrics> {
   if (isTauriEnvironment()) {
     try {

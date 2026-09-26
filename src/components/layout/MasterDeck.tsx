@@ -1,11 +1,11 @@
 import { useAudio } from "../../context/AudioContext";
-import { invokeCommand } from "../../services/ipc";
+import { minimizeWindow } from "../../services/ipc";
 
 export const MasterDeck = () => {
   const audio = useAudio();
 
   const handleMinimize = () => {
-    invokeCommand("minimize_window").catch(() => {
+    minimizeWindow().catch(() => {
       console.log("[Desktop] Window minimized to system tray");
     });
   };

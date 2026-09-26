@@ -1,6 +1,7 @@
-import { createContext, useContext, createSignal, type ParentProps } from "solid-js";
+import { createContext, useContext, createSignal, onMount, type ParentProps } from "solid-js";
 import { createStore } from "solid-js/store";
 import { loadPreferences, savePreferences } from "../services/storage";
+import { setCloseToTray } from "../services/ipc";
 import type { ChimeProfile } from "../services/soundEngine";
 
 export interface PreferencesState {
@@ -94,6 +95,10 @@ export const PreferencesProvider = (props: ParentProps) => {
   const [isSavedToastVisible, setIsSavedToastVisible] = createSignal(false);
   const [toastMessage, setToastMessage] = createSignal("");
 
+  onMount(() => {
+    setCloseToTray(initial.os.closeToTray);
+  });
+
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setIsSavedToastVisible(true);
@@ -151,6 +156,9 @@ export const PreferencesProvider = (props: ParentProps) => {
 
   const setOsToggle = (key: keyof PreferencesState["os"], value: boolean) => {
     setDraftPreferences("os", key, value as never);
+    if (key === "closeToTray") {
+      setCloseToTray(value);
+    }
   };
 
   const setHotkey = (hotkey: string) => {
@@ -167,6 +175,7 @@ export const PreferencesProvider = (props: ParentProps) => {
     setPreferences("os", { ...DEFAULT_PREFERENCES.os });
 
     savePreferences(DEFAULT_PREFERENCES);
+    setCloseToTray(DEFAULT_PREFERENCES.os.closeToTray);
     showToast("RESTORED DEFAULT SYSTEM STATE");
   };
 
@@ -174,6 +183,7 @@ export const PreferencesProvider = (props: ParentProps) => {
     setDraftPreferences("intervals", { ...preferences.intervals });
     setDraftPreferences("audio", { ...preferences.audio });
     setDraftPreferences("os", { ...preferences.os });
+    setCloseToTray(preferences.os.closeToTray);
     showToast("REVERTED UNSAVED CHANGES");
   };
 
@@ -186,6 +196,7 @@ export const PreferencesProvider = (props: ParentProps) => {
       audio: { ...draftPreferences.audio },
       os: { ...draftPreferences.os },
     });
+    setCloseToTray(draftPreferences.os.closeToTray);
     showToast("PREFERENCES APPLIED & SAVED");
   };
 
